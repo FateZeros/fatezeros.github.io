@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-06-18T08:30:43.301Z</updated>
+  <updated>2019-07-01T06:03:10.034Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>程序员必须掌握的算法</title>
+    <link href="http://yoursite.com/2019/07/01/2019-07-01/"/>
+    <id>http://yoursite.com/2019/07/01/2019-07-01/</id>
+    <published>2019-07-01T05:56:00.000Z</published>
+    <updated>2019-07-01T06:03:10.034Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="程序员必须掌握的算法"><a href="#程序员必须掌握的算法" class="headerlink" title="程序员必须掌握的算法"></a>程序员必须掌握的算法</h1><p>作为一名前端工程师，可以说是算法一直是我的短板所在。<br>既然知道了自己的缺点，就想想办法加强不是么？先把资料收藏下，以后尽量每日一刷。</p><h2 id="常用算法"><a href="#常用算法" class="headerlink" title="常用算法"></a>常用算法</h2><p>1、排序算法：快速排序、归并排序、计数排序<br>2、搜索算法：回溯、递归、剪枝<br>3、图论：最短路径、最小生成树、网络流建模<br>4、动态规划：背包问题、最长子序列、计数问题<br>5、基础技巧：分治、倍增、二分法、贪心算法</p><h2 id="据结构"><a href="#据结构" class="headerlink" title="据结构"></a>据结构</h2><p>1、数组和链表<br>2、栈与队列<br>3、树和图<br>4、哈希表<br>5、大/小跟堆，可并堆<br>6、字符串：字典树、后缀树</p><a id="more"></a><h2 id="算法刷题"><a href="#算法刷题" class="headerlink" title="算法刷题"></a>算法刷题</h2><h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>刷题时间：2019-07-01</p><h2 id="LeetCode-刷题"><a href="#LeetCode-刷题" class="headerlink" title="LeetCode 刷题"></a>LeetCode 刷题</h2><p><a href="https://leetcode-cn.com/" target="_blank" rel="noopener">LeetCode</a><br><br><a href="https://github.com/MisterBooo/LeetCodeAnimation" target="_blank" rel="noopener">LeetCodeAnimation</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;程序员必须掌握的算法&quot;&gt;&lt;a href=&quot;#程序员必须掌握的算法&quot; class=&quot;headerlink&quot; title=&quot;程序员必须掌握的算法&quot;&gt;&lt;/a&gt;程序员必须掌握的算法&lt;/h1&gt;&lt;p&gt;作为一名前端工程师，可以说是算法一直是我的短板所在。&lt;br&gt;既然知道了自己的缺点，就想想办法加强不是么？先把资料收藏下，以后尽量每日一刷。&lt;/p&gt;
+&lt;h2 id=&quot;常用算法&quot;&gt;&lt;a href=&quot;#常用算法&quot; class=&quot;headerlink&quot; title=&quot;常用算法&quot;&gt;&lt;/a&gt;常用算法&lt;/h2&gt;&lt;p&gt;1、排序算法：快速排序、归并排序、计数排序&lt;br&gt;2、搜索算法：回溯、递归、剪枝&lt;br&gt;3、图论：最短路径、最小生成树、网络流建模&lt;br&gt;4、动态规划：背包问题、最长子序列、计数问题&lt;br&gt;5、基础技巧：分治、倍增、二分法、贪心算法&lt;/p&gt;
+&lt;h2 id=&quot;据结构&quot;&gt;&lt;a href=&quot;#据结构&quot; class=&quot;headerlink&quot; title=&quot;据结构&quot;&gt;&lt;/a&gt;据结构&lt;/h2&gt;&lt;p&gt;1、数组和链表&lt;br&gt;2、栈与队列&lt;br&gt;3、树和图&lt;br&gt;4、哈希表&lt;br&gt;5、大/小跟堆，可并堆&lt;br&gt;6、字符串：字典树、后缀树&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>从零开始学 Flutter (三)</title>
     <link href="http://yoursite.com/2019/06/18/2019-06-18/"/>
     <id>http://yoursite.com/2019/06/18/2019-06-18/</id>
     <published>2019-06-18T08:19:01.000Z</published>
-    <updated>2019-06-18T08:30:43.301Z</updated>
+    <updated>2019-07-01T05:55:51.525Z</updated>
     
     <content type="html"><![CDATA[<h1 id="从零开始学-Flutter-三"><a href="#从零开始学-Flutter-三" class="headerlink" title="从零开始学 Flutter (三)"></a>从零开始学 Flutter (三)</h1><p>看了许久的 Flutter 文档，也实践过一小部分。半年来一直忙于工作，也没有时间来深入研究一下 Flutter, 趁着这段时间稍微有点空闲，准备用 Flutter 写一款小说阅读 App, 因为我上下班也喜欢刷一下小说，但是一些小说网站要么付费，要么很多小广告。所以呢，打着实践技术的旗号，也为自己写一个小说阅读 App, hahaha ～</p><p>技术选型的话：移动端 Flutter + Go/Python ?</p><a id="more"></a>]]></content>
     
@@ -216,6 +238,31 @@
 &lt;h2 id=&quot;SCP-用途&quot;&gt;&lt;a href=&quot;#SCP-用途&quot; class=&quot;headerlink&quot; title=&quot;SCP 用途&quot;&gt;&lt;/a&gt;SCP 用途&lt;/h2&gt;&lt;h3 id=&quot;1-获取远程服务器上的文件&quot;&gt;&lt;a href=&quot;#1-获取远程服务器上的文件&quot; class=&quot;headerlink&quot; title=&quot;1.获取远程服务器上的文件&quot;&gt;&lt;/a&gt;1.获取远程服务器上的文件&lt;/h3&gt;&lt;h3 id=&quot;2-将本机上的文件上传到远程服务器上&quot;&gt;&lt;a href=&quot;#2-将本机上的文件上传到远程服务器上&quot; class=&quot;headerlink&quot; title=&quot;2.将本机上的文件上传到远程服务器上&quot;&gt;&lt;/a&gt;2.将本机上的文件上传到远程服务器上&lt;/h3&gt;&lt;p&gt;远程服务器既没有配置 ftp 服务器，没有开启 web 服务器，也没有做共享，无法通过常规途径获取/上传文件时，只需要通过 scp 命令便可轻松的达到目的。&lt;/p&gt;
     
     </summary>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux机器之间文件传输 - zssh</title>
+    <link href="http://yoursite.com/2018/08/17/2018-08-17/"/>
+    <id>http://yoursite.com/2018/08/17/2018-08-17/</id>
+    <published>2018-08-16T16:00:00.000Z</published>
+    <updated>2019-07-01T05:55:44.645Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前端项目部署，需要传输文件到-Linux-服务器上，使用-zssh、rz、sz-文件互传"><a href="#前端项目部署，需要传输文件到-Linux-服务器上，使用-zssh、rz、sz-文件互传" class="headerlink" title="前端项目部署，需要传输文件到 Linux 服务器上，使用 zssh、rz、sz 文件互传"></a>前端项目部署，需要传输文件到 Linux 服务器上，使用 zssh、rz、sz 文件互传</h1><h2 id="zssh"><a href="#zssh" class="headerlink" title="zssh"></a>zssh</h2><p>zssh 全名 zmodem ssh。</p><h2 id="zmodem-协议的优势"><a href="#zmodem-协议的优势" class="headerlink" title="zmodem 协议的优势"></a>zmodem 协议的优势</h2><p>1.不需要使用很长的命令和密码，直接使用 rz、sz 加文件名就能实现文件的收发。</p><p>2.目标主机和本地主机直接传送文件，使用 sz 可以直接穿透。</p><h2 id="zssh-安装"><a href="#zssh-安装" class="headerlink" title="zssh 安装"></a>zssh 安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew intall zssh</span><br></pre></td></tr></table></figure><h2 id="zssh-使用"><a href="#zssh-使用" class="headerlink" title="zssh 使用"></a>zssh 使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 登录</span><br><span class="line">～ zssh root@192.168.1.1</span><br><span class="line"></span><br><span class="line">// 切换到本地主机</span><br><span class="line">～ ctrl + @</span><br><span class="line"></span><br><span class="line">// 上传本地主机当前目录的文件到远程主机的当前目录</span><br><span class="line">zssh&gt; sz + 文件名</span><br><span class="line"></span><br><span class="line">// 下载文件</span><br><span class="line">// 1.在远程机器上，启动sz，准备发送文件</span><br><span class="line"><span class="comment"># sz + 文件名</span></span><br><span class="line">// 2.切换到本地主机</span><br><span class="line"><span class="comment"># ctrl + @</span></span><br><span class="line">// 3.检查本地主机目录，切换到合适目录接收文件</span><br><span class="line">zssh&gt; rz</span><br><span class="line"></span><br><span class="line">// 回到远程主机</span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;前端项目部署，需要传输文件到-Linux-服务器上，使用-zssh、rz、sz-文件互传&quot;&gt;&lt;a href=&quot;#前端项目部署，需要传输文件到-Linux-服务器上，使用-zssh、rz、sz-文件互传&quot; class=&quot;headerlink&quot; title=&quot;前端项目
+      
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
     
     
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
