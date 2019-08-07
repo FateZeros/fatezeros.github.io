@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="从零开始学 Flutter (二)基本的 widgets从英文档翻译过来的 Text文本 widget Row, Column水平布局 和 垂直布局 Stack堆栈布局，允许多个 widgets 堆叠，也可以使用绝对定位布局。 Container矩形可视元素。可以使用 BoxDecoration 进行装饰，如背景、边框、阴影。">
+<meta name="description" content="从零开始学 Flutter (二)基本的 WidgetWidget 就是一个控件 flutter 中所有的对象都是一个 Widget, 不仅可以表示 UI 元素，也可以表示一些功能性组件。flutter 中真正在屏幕上显示元素的类是 Element, Widget 只是描述 Element 的一个配置。 Text文本 widget Row, Column水平布局 和 垂直布局 Stack堆栈布局，">
 <meta name="keywords" content="Flutter">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从零开始学 Flutter (二)">
 <meta property="og:url" content="http://yoursite.com/2019/02/21/2019-02-21/index.html">
 <meta property="og:site_name" content="轻舞飞扬">
-<meta property="og:description" content="从零开始学 Flutter (二)基本的 widgets从英文档翻译过来的 Text文本 widget Row, Column水平布局 和 垂直布局 Stack堆栈布局，允许多个 widgets 堆叠，也可以使用绝对定位布局。 Container矩形可视元素。可以使用 BoxDecoration 进行装饰，如背景、边框、阴影。">
+<meta property="og:description" content="从零开始学 Flutter (二)基本的 WidgetWidget 就是一个控件 flutter 中所有的对象都是一个 Widget, 不仅可以表示 UI 元素，也可以表示一些功能性组件。flutter 中真正在屏幕上显示元素的类是 Element, Widget 只是描述 Element 的一个配置。 Text文本 widget Row, Column水平布局 和 垂直布局 Stack堆栈布局，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-18T08:19:08.823Z">
+<meta property="og:updated_time" content="2019-07-25T09:31:57.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从零开始学 Flutter (二)">
-<meta name="twitter:description" content="从零开始学 Flutter (二)基本的 widgets从英文档翻译过来的 Text文本 widget Row, Column水平布局 和 垂直布局 Stack堆栈布局，允许多个 widgets 堆叠，也可以使用绝对定位布局。 Container矩形可视元素。可以使用 BoxDecoration 进行装饰，如背景、边框、阴影。">
+<meta name="twitter:description" content="从零开始学 Flutter (二)基本的 WidgetWidget 就是一个控件 flutter 中所有的对象都是一个 Widget, 不仅可以表示 UI 元素，也可以表示一些功能性组件。flutter 中真正在屏幕上显示元素的类是 Element, Widget 只是描述 Element 的一个配置。 Text文本 widget Row, Column水平布局 和 垂直布局 Stack堆栈布局，">
 
 
 
@@ -342,14 +342,15 @@
       
 
       
-        <h1 id="从零开始学-Flutter-二"><a href="#从零开始学-Flutter-二" class="headerlink" title="从零开始学 Flutter (二)"></a>从零开始学 Flutter (二)</h1><h2 id="基本的-widgets"><a href="#基本的-widgets" class="headerlink" title="基本的 widgets"></a>基本的 widgets</h2><p>从英文档翻译过来的</p>
+        <h1 id="从零开始学-Flutter-二"><a href="#从零开始学-Flutter-二" class="headerlink" title="从零开始学 Flutter (二)"></a>从零开始学 Flutter (二)</h1><h2 id="基本的-Widget"><a href="#基本的-Widget" class="headerlink" title="基本的 Widget"></a>基本的 Widget</h2><p><code>Widget</code> 就是一个控件</p>
+<p>flutter 中所有的对象都是一个 <code>Widget</code>, 不仅可以表示 UI 元素，也可以表示一些功能性组件。<br>flutter 中真正在屏幕上显示元素的类是 <code>Element</code>, <code>Widget</code> 只是描述 <code>Element</code> 的一个配置。</p>
 <h3 id="Text"><a href="#Text" class="headerlink" title="Text"></a>Text</h3><p>文本 widget</p>
 <h3 id="Row-Column"><a href="#Row-Column" class="headerlink" title="Row, Column"></a>Row, Column</h3><p>水平布局 和 垂直布局</p>
 <h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><p>堆栈布局，允许多个 widgets 堆叠，也可以使用绝对定位布局。</p>
 <h3 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h3><p>矩形可视元素。可以使用 BoxDecoration 进行装饰，如背景、边框、阴影。</p>
 <a id="more"></a>
 <h2 id="StatelessWidget-vs-StatefulWidget"><a href="#StatelessWidget-vs-StatefulWidget" class="headerlink" title="StatelessWidget vs StatefulWidget"></a>StatelessWidget vs StatefulWidget</h2><h3 id="StatelessWidget"><a href="#StatelessWidget" class="headerlink" title="StatelessWidget"></a>StatelessWidget</h3><p>无状态组件<br>从父组件接收参数，并存储在 <code>final</code> 成员变量中。</p>
-<h3 id="StatefulWidget"><a href="#StatefulWidget" class="headerlink" title="StatefulWidget"></a>StatefulWidget</h3><p>用于构建复杂组件，可以根据用户输入做出反馈，应用程序通常会带有一些状态。<br><strong> 会生成自己的 <code>State</code> 对象，然后用于保存状态。</strong></p>
+<h3 id="StatefulWidget"><a href="#StatefulWidget" class="headerlink" title="StatefulWidget"></a>StatefulWidget</h3><p>用于构建复杂组件，可以根据用户输入做出反馈，应用程序通常会带有一些状态。<br>会生成自己的 <code>State</code> 对象，然后用于保存状态。</p>
 <p><a href="https://my.oschina.net/u/4082889/blog/3012746" target="_blank" rel="noopener">Flutter | 状态管理特别篇 —— Provide</a><br><a href="https://github.com/google/flutter-provide" target="_blank" rel="noopener">Flutter-provide</a><br><a href="https://github.com/alibaba/flutter-go" target="_blank" rel="noopener">Flutter-go</a></p>
 
       
@@ -482,7 +483,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -493,7 +494,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -504,7 +505,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -544,7 +545,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从零开始学-Flutter-二"><span class="nav-number">1.</span> <span class="nav-text">从零开始学 Flutter (二)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本的-widgets"><span class="nav-number">1.1.</span> <span class="nav-text">基本的 widgets</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Text"><span class="nav-number">1.1.1.</span> <span class="nav-text">Text</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Row-Column"><span class="nav-number">1.1.2.</span> <span class="nav-text">Row, Column</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">1.1.3.</span> <span class="nav-text">Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Container"><span class="nav-number">1.1.4.</span> <span class="nav-text">Container</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StatelessWidget-vs-StatefulWidget"><span class="nav-number">1.2.</span> <span class="nav-text">StatelessWidget vs StatefulWidget</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#StatelessWidget"><span class="nav-number">1.2.1.</span> <span class="nav-text">StatelessWidget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StatefulWidget"><span class="nav-number">1.2.2.</span> <span class="nav-text">StatefulWidget</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从零开始学-Flutter-二"><span class="nav-number">1.</span> <span class="nav-text">从零开始学 Flutter (二)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本的-Widget"><span class="nav-number">1.1.</span> <span class="nav-text">基本的 Widget</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Text"><span class="nav-number">1.1.1.</span> <span class="nav-text">Text</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Row-Column"><span class="nav-number">1.1.2.</span> <span class="nav-text">Row, Column</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">1.1.3.</span> <span class="nav-text">Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Container"><span class="nav-number">1.1.4.</span> <span class="nav-text">Container</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StatelessWidget-vs-StatefulWidget"><span class="nav-number">1.2.</span> <span class="nav-text">StatelessWidget vs StatefulWidget</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#StatelessWidget"><span class="nav-number">1.2.1.</span> <span class="nav-text">StatelessWidget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StatefulWidget"><span class="nav-number">1.2.2.</span> <span class="nav-text">StatefulWidget</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
