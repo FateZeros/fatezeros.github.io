@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="tools,">
+  <meta name="keywords" content="webpack,">
 
 
 
@@ -81,18 +81,20 @@
 
 
 
-<meta name="description" content="一些鲜为人知的高质量自学网站考试库考试酷是一个永久免费的电子作业与在线考试系统云平台。 2uts2uts 是一个完全免费的视频教程网站，它提供了丰富并且免费的高质量国外视频教程。 大学资源网大学资源网是一个功能强大的完全免费在线学习网站，提供了丰富并且全面的学习视频教程。 DoyoudoDoyoudo 是一个专注平面设计软件、视频剪辑软件的高质量自学网站，它免费提供了丰富的视频教程，这些视频教程的">
-<meta name="keywords" content="tools">
+<meta name="description" content="webpack HMR 原理解读Hot Module Replacement 简称 HMR。当我们对对面进行修改并保存后，webpack 将对代码重新打包，并将新的模块发送到浏览器端，浏览器进行新老模块替换，这样在不刷新浏览器的情况下可以对应用进行更行。 HMR 官网指南 HMR 的工作原理图解 上图是 webpack 配合 webpack-dev-server 进行应用开发的模块热更新流程图。">
+<meta name="keywords" content="webpack">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自学网站收藏">
-<meta property="og:url" content="http://yoursite.com/2019/08/07/2019-08-07/index.html">
+<meta property="og:title" content="webpack HMR 原理解读">
+<meta property="og:url" content="http://yoursite.com/2019/09/23/2019-09-23/index.html">
 <meta property="og:site_name" content="轻舞飞扬">
-<meta property="og:description" content="一些鲜为人知的高质量自学网站考试库考试酷是一个永久免费的电子作业与在线考试系统云平台。 2uts2uts 是一个完全免费的视频教程网站，它提供了丰富并且免费的高质量国外视频教程。 大学资源网大学资源网是一个功能强大的完全免费在线学习网站，提供了丰富并且全面的学习视频教程。 DoyoudoDoyoudo 是一个专注平面设计软件、视频剪辑软件的高质量自学网站，它免费提供了丰富的视频教程，这些视频教程的">
+<meta property="og:description" content="webpack HMR 原理解读Hot Module Replacement 简称 HMR。当我们对对面进行修改并保存后，webpack 将对代码重新打包，并将新的模块发送到浏览器端，浏览器进行新老模块替换，这样在不刷新浏览器的情况下可以对应用进行更行。 HMR 官网指南 HMR 的工作原理图解 上图是 webpack 配合 webpack-dev-server 进行应用开发的模块热更新流程图。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-07T01:07:09.970Z">
+<meta property="og:image" content="http://yoursite.com/images/20190923/201909-T1@2x.png">
+<meta property="og:updated_time" content="2019-09-23T14:32:41.829Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自学网站收藏">
-<meta name="twitter:description" content="一些鲜为人知的高质量自学网站考试库考试酷是一个永久免费的电子作业与在线考试系统云平台。 2uts2uts 是一个完全免费的视频教程网站，它提供了丰富并且免费的高质量国外视频教程。 大学资源网大学资源网是一个功能强大的完全免费在线学习网站，提供了丰富并且全面的学习视频教程。 DoyoudoDoyoudo 是一个专注平面设计软件、视频剪辑软件的高质量自学网站，它免费提供了丰富的视频教程，这些视频教程的">
+<meta name="twitter:title" content="webpack HMR 原理解读">
+<meta name="twitter:description" content="webpack HMR 原理解读Hot Module Replacement 简称 HMR。当我们对对面进行修改并保存后，webpack 将对代码重新打包，并将新的模块发送到浏览器端，浏览器进行新老模块替换，这样在不刷新浏览器的情况下可以对应用进行更行。 HMR 官网指南 HMR 的工作原理图解 上图是 webpack 配合 webpack-dev-server 进行应用开发的模块热更新流程图。">
+<meta name="twitter:image" content="http://yoursite.com/images/20190923/201909-T1@2x.png">
 
 
 
@@ -122,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/07/2019-08-07/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/23/2019-09-23/">
 
 
 
 
 
-  <title>自学网站收藏 | 轻舞飞扬</title>
+  <title>webpack HMR 原理解读 | 轻舞飞扬</title>
   
 
 
@@ -265,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/2019-08-07/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/2019-09-23/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FateZeros">
@@ -282,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">自学网站收藏</h1>
+          <h1 class="post-title" itemprop="name headline">webpack HMR 原理解读</h1>
         
 
         <div class="post-meta">
@@ -294,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-07T00:00:00+08:00">
-                2019-08-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-23T00:00:00+08:00">
+                2019-09-23
               </time>
             
 
@@ -313,8 +315,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/08/07/2019-08-07/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/07/2019-08-07/" itemprop="commentCount"></span>
+                <a href="/2019/09/23/2019-09-23/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/23/2019-09-23/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -342,12 +344,23 @@
       
 
       
-        <h1 id="一些鲜为人知的高质量自学网站"><a href="#一些鲜为人知的高质量自学网站" class="headerlink" title="一些鲜为人知的高质量自学网站"></a>一些鲜为人知的高质量自学网站</h1><h2 id="考试库"><a href="#考试库" class="headerlink" title="考试库"></a><a href="https://www.examcoo.com/index/ku" target="_blank" rel="noopener">考试库</a></h2><p>考试酷是一个永久免费的电子作业与在线考试系统云平台。</p>
-<h2 id="2uts"><a href="#2uts" class="headerlink" title="2uts"></a><a href="https://2uts.com/" target="_blank" rel="noopener">2uts</a></h2><p>2uts 是一个完全免费的视频教程网站，它提供了丰富并且免费的高质量国外视频教程。</p>
-<h2 id="大学资源网"><a href="#大学资源网" class="headerlink" title="大学资源网"></a><a href="http://www.dxzy163.com/" target="_blank" rel="noopener">大学资源网</a></h2><p>大学资源网是一个功能强大的完全免费在线学习网站，提供了丰富并且全面的学习视频教程。</p>
-<h2 id="Doyoudo"><a href="#Doyoudo" class="headerlink" title="Doyoudo"></a><a href="http://www.doyoudo.com/" target="_blank" rel="noopener">Doyoudo</a></h2><p>Doyoudo 是一个专注平面设计软件、视频剪辑软件的高质量自学网站，它免费提供了丰富的视频教程，这些视频教程的质量都很高，并且通俗易懂。</p>
-<h2 id="书栈网"><a href="#书栈网" class="headerlink" title="书栈网"></a><a href="https://www.bookstack.cn/" target="_blank" rel="noopener">书栈网</a></h2><p>书栈网是一个功能强大并且十分良心的计算机电子书籍在线阅读和下载网站，它也提供了各种开发文档和使用手册，是一个非常适合程序员在线学习的一个网站。</p>
-<h2 id="如何吧"><a href="#如何吧" class="headerlink" title="如何吧"></a><a href="https://www.ruhe8.com/" target="_blank" rel="noopener">如何吧</a></h2><p>如何吧是一个聚合 Excel 、PPT 、Word 、Photoshop 软件使用技巧的实用网站，它以图文的方式提供了很多高质量的实用软件技巧。</p>
+        <h1 id="webpack-HMR-原理解读"><a href="#webpack-HMR-原理解读" class="headerlink" title="webpack HMR 原理解读"></a>webpack HMR 原理解读</h1><p>Hot Module Replacement 简称 HMR。当我们对对面进行修改并保存后，webpack 将对代码重新打包，并将新的模块发送到浏览器端，浏览器进行新老模块替换，这样在不刷新浏览器的情况下可以对应用进行更行。</p>
+<p><a href="https://webpack.docschina.org/guides/hot-module-replacement/#-hmr" target="_blank" rel="noopener">HMR 官网指南</a></p>
+<h1 id="HMR-的工作原理图解"><a href="#HMR-的工作原理图解" class="headerlink" title="HMR 的工作原理图解"></a>HMR 的工作原理图解</h1><p><img src="/images/20190923/201909-T1@2x.png" alt=""></p>
+<p>上图是 webpack 配合 webpack-dev-server 进行应用开发的模块热更新流程图。</p>
+<ol>
+<li>红色框内为服务端，橙色框内为浏览器端。</li>
+<li>绿色框内为 webpack 代码控制的区域。蓝色框内为 webpack-dev-server 代码控制的区域。洋红色框为文件系统，文件修改的变化即发生在此。青色框为应用本身。</li>
+</ol>
+<a id="more"></a>
+<p>上图也显示了我们修改代码到模块热更新完成的一个周期：</p>
+<p>第一步，在 webpack 的 watch 模式下，文件系统中某一个文件发生修改，webpack 监听到文件变化，根据配置文件对模块重新编译打包，并将打包后的代码通过简单的 JavaScript 对象保存在内存中。</p>
+<p>第二步，是 webpack-dev-server 和 webpack 之间的接口交互，而在这一步，主要是 dev-server 的中间件 webpack-dev-middleware 和 webpack 之间的交互，webpack-dev-middleware 调用 webpack 暴露的 API 对代码变化进行监控，并且告诉 webpack，将代码打包到内存中。</p>
+<p>第三步，是 webpack-dev-server 对文件变化的一个监控，这一步不同于第一步，并不是监控代码变化重新打包。当我们在配置文件中配置了 devServer.watchContentBase 为 true 的时候，Server 会监听这些配置文件夹中静态文件的变化，变化后会通知浏览器端对应用进行 live reload。注意，这儿是浏览器刷新，和 HMR 是两个概念。</p>
+<p>第四步，也是 webpack-dev-server 代码的工作，该步骤主要是通过 sockjs（webpack-dev-server 的依赖）在浏览器端和服务端之间建立一个 websocket 长连接，将 webpack 编译打包的各个阶段的状态信息告知浏览器端，同时也包括第三步中 Server 监听静态文件变化的信息。浏览器端根据这些 socket 消息进行不同的操作。当然服务端传递的最主要信息还是新模块的 hash 值，后面的步骤根据这一 hash 值来进行模块热替换。</p>
+<p>webpack-dev-server/client 端并不能够请求更新的代码，也不会执行热更模块操作，而把这些工作又交回给了 webpack，webpack/hot/dev-server 的工作就是根据 webpack-dev-server/client 传给它的信息以及 dev-server 的配置决定是刷新浏览器呢还是进行模块热更新。当然如果仅仅是刷新浏览器，也就没有后面那些步骤了。</p>
+<p>HotModuleReplacement.runtime 是客户端 HMR 的中枢，它接收到上一步传递给他的新模块的 hash 值，它通过 JsonpMainTemplate.runtime 向 server 端发送 Ajax 请求，服务端返回一个 json，该 json 包含了所有要更新的模块的 hash 值，获取到更新列表后，该模块再次通过 jsonp 请求，获取到最新的模块代码。这就是上图中 7、8、9 步骤。</p>
+<p>而第 10 步是决定 HMR 成功与否的关键步骤，在该步骤中，HotModulePlugin 将会对新旧模块进行对比，决定是否更新模块，在决定更新模块后，检查模块之间的依赖关系，更新模块的同时更新模块间的依赖引用。<br>最后一步，当 HMR 失败后，回退到 live reload 操作，也就是进行浏览器刷新来获取最新打包代码。</p>
 
       
     </div>
@@ -365,7 +378,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/tools/" rel="tag"># tools</a>
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
           
         </div>
       
@@ -378,8 +391,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/25/2019-04-03/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2019/09/22/2019-09-22/" rel="next" title="2019国庆惠州游">
+                <i class="fa fa-chevron-left"></i> 2019国庆惠州游
               </a>
             
           </div>
@@ -388,8 +401,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/22/2019-09-22/" rel="prev" title="2019国庆惠州游">
-                2019国庆惠州游 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/25/2019-09-25/" rel="prev" title="webpack tree shaking">
+                webpack tree shaking <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -541,7 +554,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一些鲜为人知的高质量自学网站"><span class="nav-number">1.</span> <span class="nav-text">一些鲜为人知的高质量自学网站</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#考试库"><span class="nav-number">1.1.</span> <span class="nav-text">考试库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2uts"><span class="nav-number">1.2.</span> <span class="nav-text">2uts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大学资源网"><span class="nav-number">1.3.</span> <span class="nav-text">大学资源网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Doyoudo"><span class="nav-number">1.4.</span> <span class="nav-text">Doyoudo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#书栈网"><span class="nav-number">1.5.</span> <span class="nav-text">书栈网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何吧"><span class="nav-number">1.6.</span> <span class="nav-text">如何吧</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#webpack-HMR-原理解读"><span class="nav-number">1.</span> <span class="nav-text">webpack HMR 原理解读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HMR-的工作原理图解"><span class="nav-number">2.</span> <span class="nav-text">HMR 的工作原理图解</span></a></li></ol></div>
             
 
           </div>
@@ -705,9 +718,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/08/07/2019-08-07/';
-          this.page.identifier = '2019/08/07/2019-08-07/';
-          this.page.title = '自学网站收藏';
+          this.page.url = 'http://yoursite.com/2019/09/23/2019-09-23/';
+          this.page.identifier = '2019/09/23/2019-09-23/';
+          this.page.title = 'webpack HMR 原理解读';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
