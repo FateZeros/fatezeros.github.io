@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-29T09:20:52.025Z</updated>
+  <updated>2019-12-10T03:03:20.848Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Centos 下安装 python3</title>
+    <link href="http://yoursite.com/2019/12/10/2019-12-10/"/>
+    <id>http://yoursite.com/2019/12/10/2019-12-10/</id>
+    <published>2019-12-09T16:00:00.000Z</published>
+    <updated>2019-12-10T03:03:20.848Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Centos-下安装-python3"><a href="#Centos-下安装-python3" class="headerlink" title="Centos 下安装 python3"></a>Centos 下安装 python3</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="更新-yum"><a href="#更新-yum" class="headerlink" title="更新 yum"></a>更新 yum</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y update</span><br></pre></td></tr></table></figure><h3 id="安装-yum-utils"><a href="#安装-yum-utils" class="headerlink" title="安装 yum-utils"></a>安装 yum-utils</h3><p>一组扩展和补充yum的实用程序和插件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install yum-utils</span><br></pre></td></tr></table></figure><h3 id="安装-CentOS-开发工具"><a href="#安装-CentOS-开发工具" class="headerlink" title="安装 CentOS 开发工具"></a>安装 CentOS 开发工具</h3><p>用于允许从源代码构建和编译软件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y groupinstall development</span><br></pre></td></tr></table></figure><a id="more"></a><h2 id="安装-python3"><a href="#安装-python3" class="headerlink" title="安装 python3"></a>安装 python3</h2><p><a href="https://www.python.org" target="_blank" rel="noopener">python 官网</a></p><p>CentOS 上，除了 os 类的 yum 源，还需要配置几个常用的源：EPEL、IUS。</p><h3 id="安装-EPEL"><a href="#安装-EPEL" class="headerlink" title="安装 EPEL"></a>安装 EPEL</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install epel-release</span><br></pre></td></tr></table></figure><h3 id="安装-IUS-软件源"><a href="#安装-IUS-软件源" class="headerlink" title="安装 IUS 软件源"></a>安装 IUS 软件源</h3><p>IUS 只为 RHEL 和 CentOS 这两个发行版提供较新版本的 rpm 包。如果在 os 或 epel 找不到某个软件的新版 rpm，软件官方又只提供源代码包的时候，可以来 ius 源中找，几乎都能找到。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm</span><br></pre></td></tr></table></figure><h3 id="安装-Python3-6"><a href="#安装-Python3-6" class="headerlink" title="安装 Python3.6"></a>安装 Python3.6</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install python36u</span><br></pre></td></tr></table></figure><h3 id="安装-pip3"><a href="#安装-pip3" class="headerlink" title="安装 pip3"></a>安装 pip3</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install python36u-pip</span><br></pre></td></tr></table></figure><h3 id="检查安装情况"><a href="#检查安装情况" class="headerlink" title="检查安装情况"></a>检查安装情况</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python3.6 -V</span><br><span class="line"></span><br><span class="line">pip3.6 -V</span><br></pre></td></tr></table></figure><p><img src="/images/20191210/20191210-1.png" alt=""></p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://juejin.im/post/5b3883baf265da59ad43ae5a" target="_blank" rel="noopener">CentOS 7.4 下安装Python3.6</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Centos-下安装-python3&quot;&gt;&lt;a href=&quot;#Centos-下安装-python3&quot; class=&quot;headerlink&quot; title=&quot;Centos 下安装 python3&quot;&gt;&lt;/a&gt;Centos 下安装 python3&lt;/h1&gt;&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;h3 id=&quot;更新-yum&quot;&gt;&lt;a href=&quot;#更新-yum&quot; class=&quot;headerlink&quot; title=&quot;更新 yum&quot;&gt;&lt;/a&gt;更新 yum&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo yum -y update&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;安装-yum-utils&quot;&gt;&lt;a href=&quot;#安装-yum-utils&quot; class=&quot;headerlink&quot; title=&quot;安装 yum-utils&quot;&gt;&lt;/a&gt;安装 yum-utils&lt;/h3&gt;&lt;p&gt;一组扩展和补充yum的实用程序和插件&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo yum -y install yum-utils&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;安装-CentOS-开发工具&quot;&gt;&lt;a href=&quot;#安装-CentOS-开发工具&quot; class=&quot;headerlink&quot; title=&quot;安装 CentOS 开发工具&quot;&gt;&lt;/a&gt;安装 CentOS 开发工具&lt;/h3&gt;&lt;p&gt;用于允许从源代码构建和编译软件&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo yum -y groupinstall development&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>程序员必读的书</title>
     <link href="http://yoursite.com/2019/10/29/2019-10-29/"/>
     <id>http://yoursite.com/2019/10/29/2019-10-29/</id>
     <published>2019-10-28T16:00:00.000Z</published>
-    <updated>2019-10-29T09:20:52.025Z</updated>
+    <updated>2019-12-10T02:36:31.925Z</updated>
     
     <content type="html"><![CDATA[<h1 id="程序员必读的书"><a href="#程序员必读的书" class="headerlink" title="程序员必读的书"></a>程序员必读的书</h1><p>作为一个程序员这么多年了，也没正儿八经的读完过几本书，趁着这段时间有空，赶紧提升下自己。</p><p>离 2019 年春节还有 3 个月多一点的时间。也别读太多，让自己难以下台。给自己定个小目标先，选两本书，然后争取读完。</p><p>技术类的书籍大致可以分为两类：<strong>术</strong>和<strong>道</strong></p><p>我看过的绝大多数的技术书都应该属于“术”级别，大多讲解的客观知识、方法和步骤，相当于工具书。</p><p>而极少数的技术书属于“道”级别。到底什么是道呢？<strong>道就是放之四海而皆准的原理、法则，是经过长时间、大范围的检验、实践和优化而总结出来的经验规律.</strong></p><p><strong>术</strong>和<strong>道</strong>的区别，也就是“授人以鱼”和“授人以渔”的区别</p><a id="more"></a><p><strong>术</strong>的书我也看了不少，代码也写了这么多年了，始终感觉自己无法拥有更高的视野、更深的认知，只是局限于代码而已。</p><p>下面就是我看别人推荐的一些程序猿必读<strong>道</strong>级别书籍：</p><p>1.《重构》<br>2.《代码整洁之道》<br>3.《设计模式》至少是《大话设计模式》<br>4.《编程珠玑》<br>5.《算法》<br>6.《代码大全》</p><p>给今年的自己定个目标先：阅读完<strong>《大话设计模式》</strong> 和 <strong>《重构》</strong> 这两本书先。</p><h2 id="读书进度检查"><a href="#读书进度检查" class="headerlink" title="读书进度检查"></a>读书进度检查</h2><p>每周检查一下进度，并记下自己的读书心得。</p>]]></content>
     
@@ -198,7 +224,7 @@
     <link href="http://yoursite.com/2019/09/23/2019-09-23/"/>
     <id>http://yoursite.com/2019/09/23/2019-09-23/</id>
     <published>2019-09-22T16:00:00.000Z</published>
-    <updated>2019-09-23T14:33:36.709Z</updated>
+    <updated>2019-10-23T00:58:14.561Z</updated>
     
     <content type="html"><![CDATA[<h1 id="webpack-HMR-原理解读"><a href="#webpack-HMR-原理解读" class="headerlink" title="webpack HMR 原理解读"></a>webpack HMR 原理解读</h1><p>Hot Module Replacement 简称 HMR。当我们对对面进行修改并保存后，webpack 将对代码重新打包，并将新的模块发送到浏览器端，浏览器进行新老模块替换，这样在不刷新浏览器的情况下可以对应用进行更行。</p><p><a href="https://webpack.docschina.org/guides/hot-module-replacement/#-hmr" target="_blank" rel="noopener">HMR 官网指南</a></p><h1 id="HMR-的工作原理图解"><a href="#HMR-的工作原理图解" class="headerlink" title="HMR 的工作原理图解"></a>HMR 的工作原理图解</h1><p><img src="/images/20190923/201909-T1@2x.png" alt=""></p><p>上图是 webpack 配合 webpack-dev-server 进行应用开发的模块热更新流程图。</p><ol><li>红色框内为服务端，橙色框内为浏览器端。</li><li>绿色框内为 webpack 代码控制的区域。蓝色框内为 webpack-dev-server 代码控制的区域。洋红色框为文件系统，文件修改的变化即发生在此。青色框为应用本身。</li></ol><a id="more"></a><p>上图也显示了我们修改代码到模块热更新完成的一个周期：</p><p>第一步，在 webpack 的 watch 模式下，文件系统中某一个文件发生修改，webpack 监听到文件变化，根据配置文件对模块重新编译打包，并将打包后的代码通过简单的 JavaScript 对象保存在内存中。</p><p>第二步，是 webpack-dev-server 和 webpack 之间的接口交互，而在这一步，主要是 dev-server 的中间件 webpack-dev-middleware 和 webpack 之间的交互，webpack-dev-middleware 调用 webpack 暴露的 API 对代码变化进行监控，并且告诉 webpack，将代码打包到内存中。</p><p>第三步，是 webpack-dev-server 对文件变化的一个监控，这一步不同于第一步，并不是监控代码变化重新打包。当我们在配置文件中配置了 devServer.watchContentBase 为 true 的时候，Server 会监听这些配置文件夹中静态文件的变化，变化后会通知浏览器端对应用进行 live reload。注意，这儿是浏览器刷新，和 HMR 是两个概念。</p><p>第四步，也是 webpack-dev-server 代码的工作，该步骤主要是通过 sockjs（webpack-dev-server 的依赖）在浏览器端和服务端之间建立一个 websocket 长连接，将 webpack 编译打包的各个阶段的状态信息告知浏览器端，同时也包括第三步中 Server 监听静态文件变化的信息。浏览器端根据这些 socket 消息进行不同的操作。当然服务端传递的最主要信息还是新模块的 hash 值，后面的步骤根据这一 hash 值来进行模块热替换。</p><p>webpack-dev-server/client 端并不能够请求更新的代码，也不会执行热更模块操作，而把这些工作又交回给了 webpack，webpack/hot/dev-server 的工作就是根据 webpack-dev-server/client 传给它的信息以及 dev-server 的配置决定是刷新浏览器呢还是进行模块热更新。当然如果仅仅是刷新浏览器，也就没有后面那些步骤了。</p><p>HotModuleReplacement.runtime 是客户端 HMR 的中枢，它接收到上一步传递给他的新模块的 hash 值，它通过 JsonpMainTemplate.runtime 向 server 端发送 Ajax 请求，服务端返回一个 json，该 json 包含了所有要更新的模块的 hash 值，获取到更新列表后，该模块再次通过 jsonp 请求，获取到最新的模块代码。这就是上图中 7、8、9 步骤。</p><p>而第 10 步是决定 HMR 成功与否的关键步骤，在该步骤中，HotModulePlugin 将会对新旧模块进行对比，决定是否更新模块，在决定更新模块后，检查模块之间的依赖关系，更新模块的同时更新模块间的依赖引用。<br>最后一步，当 HMR 失败后，回退到 live reload 操作，也就是进行浏览器刷新来获取最新打包代码。</p>]]></content>
     
@@ -501,24 +527,6 @@
     
     
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>构建 JavaScript SDK</title>
-    <link href="http://yoursite.com/2019/01/18/2019-01-18/"/>
-    <id>http://yoursite.com/2019/01/18/2019-01-18/</id>
-    <published>2019-01-18T08:26:44.000Z</published>
-    <updated>2019-06-18T08:18:04.079Z</updated>
-    
-    <content type="html"><![CDATA[<p>如果构建一个 SDK</p><a id="more"></a><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://juejin.im/post/5a2a53b151882503dc539f41" target="_blank" rel="noopener">用 webpack 写一个简单的 JS SDK</a> <br><br><a href="http://hueitan.github.io/javascript-sdk-design/" target="_blank" rel="noopener">javascript-sdk-design</a> <br><br><a href="https://juejin.im/entry/57dd4c277db2a24eb1b38dfa" target="_blank" rel="noopener">JavaScript-SDK - 设计指南</a> <br><br><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage" target="_blank" rel="noopener">关于 iframe 和窗口的跨源通信 APIs</a> <br></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;如果构建一个 SDK&lt;/p&gt;
-    
-    </summary>
-    
     
   </entry>
   
