@@ -261,6 +261,327 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/28/2020-05-28/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FateZeros">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="轻舞飞扬">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/28/2020-05-28/" itemprop="url">vue-cli3 分环境打包</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-28T00:00:00+08:00">
+                2020-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/05/28/2020-05-28/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/05/28/2020-05-28/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Vue-cli3-配置环境变量与分环境打包"><a href="#Vue-cli3-配置环境变量与分环境打包" class="headerlink" title="Vue-cli3 配置环境变量与分环境打包"></a>Vue-cli3 配置环境变量与分环境打包</h1><h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>在前端项目开发完成后，在发布的时候，我们会需要将项目部署到不同环境，例如开发，测试，预发布，生产。</p>
+<p>这个时候就需要前端项目根据部署的环境，配置 <code>环境变量</code> 进行打包。</p>
+<p>我们可以在前端项目的根目录下新增以下 <code>环境变量文件</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.env                <span class="comment"># 在所有的环境中都会被载入</span></span><br><span class="line">.env.local          <span class="comment"># 在所有的环境中都会被载入,会被 git 忽略</span></span><br><span class="line">.env.[mode]         <span class="comment"># 在指定的模式中被载入</span></span><br><span class="line">.env.[mode].<span class="built_in">local</span>   <span class="comment"># 在指定的模式中被载入, 会被 git 忽略</span></span><br><span class="line">.env.develop        <span class="comment"># 示例</span></span><br></pre></td></tr></table></figure>
+<p>环境变量文件只包含环境变量的 <code>键值对</code>，例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 接口地址</span><br><span class="line">VUE_APP_BASE_URL = <span class="string">'xxx'</span></span><br></pre></td></tr></table></figure>
+<p>除了自定义的 <code>VUE_APP_*</code> 变量之外，环境变量文件中还有 2 个特殊的变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NODE_ENV       <span class="comment"># develop、production、test 中的一个。具体的值取决于运行的模式</span></span><br><span class="line">BASE_URL       <span class="comment"># 与 vue.config.js 中的 publicPath 相同，即应用会部署到的基础路径</span></span><br></pre></td></tr></table></figure>
+<p>为一个指定模式的准备环境变量文件如 <code>.env.staging</code> 会比一般的环境变量文件 <code>.env</code> 拥有更高的优先级。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/05/28/2020-05-28/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/19/2019-12-19/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FateZeros">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="轻舞飞扬">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/19/2019-12-19/" itemprop="url">重温时间复杂度</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-19T00:00:00+08:00">
+                2019-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/19/2019-12-19/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/19/2019-12-19/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="重温时间复杂度"><a href="#重温时间复杂度" class="headerlink" title="重温时间复杂度"></a>重温时间复杂度</h1><h2 id="何为算法-Algorithm"><a href="#何为算法-Algorithm" class="headerlink" title="何为算法(Algorithm) ?"></a>何为算法(Algorithm) ?</h2><p><strong>算法是指用来操作数据、解决程序问题的一组方法</strong></p>
+<p>衡量算法的优劣：主要从<strong>时间</strong>和<strong>空间</strong>两个维度去考量。</p>
+<p>时间维度：是指执行当前算法所消耗的时间，我们通常用「时间复杂度」来描述。<br>空间维度：是指执行当前算法需要占用多少内存空间，我们通常用「空间复杂度」来描述。</p>
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p><strong>T(n) = O(f(n))</strong></p>
+<p>其中 n 表示数据规模，O(f(n)) 表示运行算法所需要执行的指令数，和 f(n) 成正比。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.zhihu.com/question/23148377/answer/907915556" target="_blank" rel="noopener">程序员必须掌握哪些算法?</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/10/2019-12-10/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1500,286 +1821,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/22/2019-09-22/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FateZeros">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="轻舞飞扬">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/22/2019-09-22/" itemprop="url">2019国庆惠州游</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-22T00:00:00+08:00">
-                2019-09-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/22/2019-09-22/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/22/2019-09-22/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="2019-国庆惠州游"><a href="#2019-国庆惠州游" class="headerlink" title="2019 国庆惠州游"></a>2019 国庆惠州游</h1><h2 id="活动准备"><a href="#活动准备" class="headerlink" title="活动准备"></a>活动准备</h2><p>活动开始时间<br><strong>2019 年 10 月 3 日 7 点</strong></p>
-<p>活动出发地点<br><strong>深圳 龙岗</strong></p>
-<p>活动参与人数<br><strong>6 人</strong></p>
-<p>活动参与携带证件<br><strong>身份证 + 驾驶证</strong></p>
-<p>活动方式<br><strong>自驾</strong></p>
-<p>费用<br><strong>AA</strong></p>
-<h2 id="活动路线"><a href="#活动路线" class="headerlink" title="活动路线"></a>活动路线</h2><h3 id="第一站-惠州罗浮山"><a href="#第一站-惠州罗浮山" class="headerlink" title="第一站 - 惠州罗浮山"></a>第一站 - 惠州罗浮山</h3><p>活动时间：10 月 3 日整天<br>10 月 3 日 8 点，深圳龙岗出发，驾车至罗浮山朱明洞景区。</p>
-<p><img src="/images/20190922/201909-T1@2x.png" alt=""></p>
-<p>罗浮山主要活动：爬山至飞云顶，海拔 1296 米，最有名的道教名观 - 冲虚观也在此景区。上下山大概需要 8 小时，准备好驱蚊、防晒、长袖衣服。</p>
-<p>晚上驾车去我家吃饭</p>
-<p>住宿地点：10 月 3 日，在我家附近的酒店。（无需要预定）</p>
-<p><img src="/images/20190922/201909-T2@2x.png" alt=""></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/09/22/2019-09-22/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/2019-08-07/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FateZeros">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="轻舞飞扬">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/07/2019-08-07/" itemprop="url">自学网站收藏</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-07T00:00:00+08:00">
-                2019-08-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/08/07/2019-08-07/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/07/2019-08-07/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="一些鲜为人知的高质量自学网站"><a href="#一些鲜为人知的高质量自学网站" class="headerlink" title="一些鲜为人知的高质量自学网站"></a>一些鲜为人知的高质量自学网站</h1><h2 id="考试库"><a href="#考试库" class="headerlink" title="考试库"></a><a href="https://www.examcoo.com/index/ku" target="_blank" rel="noopener">考试库</a></h2><p>考试酷是一个永久免费的电子作业与在线考试系统云平台。</p>
-<h2 id="2uts"><a href="#2uts" class="headerlink" title="2uts"></a><a href="https://2uts.com/" target="_blank" rel="noopener">2uts</a></h2><p>2uts 是一个完全免费的视频教程网站，它提供了丰富并且免费的高质量国外视频教程。</p>
-<h2 id="大学资源网"><a href="#大学资源网" class="headerlink" title="大学资源网"></a><a href="http://www.dxzy163.com/" target="_blank" rel="noopener">大学资源网</a></h2><p>大学资源网是一个功能强大的完全免费在线学习网站，提供了丰富并且全面的学习视频教程。</p>
-<h2 id="Doyoudo"><a href="#Doyoudo" class="headerlink" title="Doyoudo"></a><a href="http://www.doyoudo.com/" target="_blank" rel="noopener">Doyoudo</a></h2><p>Doyoudo 是一个专注平面设计软件、视频剪辑软件的高质量自学网站，它免费提供了丰富的视频教程，这些视频教程的质量都很高，并且通俗易懂。</p>
-<h2 id="书栈网"><a href="#书栈网" class="headerlink" title="书栈网"></a><a href="https://www.bookstack.cn/" target="_blank" rel="noopener">书栈网</a></h2><p>书栈网是一个功能强大并且十分良心的计算机电子书籍在线阅读和下载网站，它也提供了各种开发文档和使用手册，是一个非常适合程序员在线学习的一个网站。</p>
-<h2 id="如何吧"><a href="#如何吧" class="headerlink" title="如何吧"></a><a href="https://www.ruhe8.com/" target="_blank" rel="noopener">如何吧</a></h2><p>如何吧是一个聚合 Excel 、PPT 、Word 、Photoshop 软件使用技巧的实用网站，它以图文的方式提供了很多高质量的实用软件技巧。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1832,7 +1873,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1843,7 +1884,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1854,7 +1895,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1898,7 +1939,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
