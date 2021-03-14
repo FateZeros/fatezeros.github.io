@@ -261,6 +261,643 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/04/2021-01-04/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FateZeros">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="轻舞飞扬">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/04/2021-01-04/" itemprop="url">JavaScript 常用小技巧</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-04T00:00:00+08:00">
+                2021-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/01/04/2021-01-04/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/01/04/2021-01-04/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="JavaScript-常用小技巧"><a href="#JavaScript-常用小技巧" class="headerlink" title="JavaScript 常用小技巧"></a>JavaScript 常用小技巧</h1><h2 id="类型检查小工具"><a href="#类型检查小工具" class="headerlink" title="类型检查小工具"></a>类型检查小工具</h2><p><code>JavaScript</code> 不是强类型语言，我们可以通过集成强类型检测 <code>TypeScript</code>， 但是有时候我们只是想做一个简单的类型检查。这时候就可以用到 <code>typeof</code> 关键字。</p>
+<p><code>typeof</code> 的问题在于，用于基本数据类型和函数时效果很好，但是对于数组和对象来说，由于它们都被视为对象，因此很难把握它们之间的区别。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">const isOfType = (() =&gt; &#123;</span><br><span class="line">  // create a plain object with no prototype</span><br><span class="line">  const <span class="built_in">type</span> = Object.create(null);</span><br><span class="line"></span><br><span class="line">  // check <span class="keyword">for</span> null <span class="built_in">type</span></span><br><span class="line">  type.null = x =&gt; x === null;</span><br><span class="line">  </span><br><span class="line">  type.undefined = x =&gt; x === undefined;</span><br><span class="line">  </span><br><span class="line">  type.nil = x =&gt; type.null(x) || type.undefined(x);</span><br><span class="line"></span><br><span class="line">  type.string = x =&gt; !type.nil(x) &amp;&amp; (typeof x === <span class="string">'string'</span> || x instanceof String);</span><br><span class="line">  </span><br><span class="line">  type.number = x =&gt; !type.nil(x) &amp;&amp; ((!isNaN(x) &amp;&amp; isFinite(x) &amp;&amp; typeof x === <span class="string">'number'</span>) || x instanceof Number);</span><br><span class="line"></span><br><span class="line">  type.boolean = x =&gt; !type.nil(x) &amp;&amp; (typeof x === <span class="string">'boolean'</span> || x instanceof Boolean);</span><br><span class="line"></span><br><span class="line">  type.array = x =&gt; !type.nil(x) &amp;&amp; Array.isArray(x);</span><br><span class="line"></span><br><span class="line">  type.object = x =&gt; (&#123;&#125;).toString.call(x) === <span class="string">'[object Object]'</span>;</span><br><span class="line"></span><br><span class="line">  type.type = x =&gt; (x, X) =&gt; !type.nil(x) &amp;&amp; x instanceof X;</span><br><span class="line"></span><br><span class="line">  type.set = x =&gt; type.type(x, Set);</span><br><span class="line"></span><br><span class="line">  type.map = x =&gt; type.type(x, Map);</span><br><span class="line"></span><br><span class="line">  type.date = x =&gt; type.type(x, Date);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">return</span> <span class="built_in">type</span>;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/01/04/2021-01-04/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/04/2021-02-18/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FateZeros">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="轻舞飞扬">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/04/2021-02-18/" itemprop="url">git 连接 github 超时问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-04T00:00:00+08:00">
+                2021-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Github/" itemprop="url" rel="index">
+                    <span itemprop="name">Github</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/01/04/2021-02-18/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/01/04/2021-02-18/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="git-连接-github-超时问题"><a href="#git-连接-github-超时问题" class="headerlink" title="git 连接 github 超时问题"></a>git 连接 github 超时问题</h1><h2 id="port-22-报错"><a href="#port-22-报错" class="headerlink" title="port 22 报错"></a>port 22 报错</h2><p>当 git clone 代码的时候遇到 port 22</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh: connect to host github.com port 22: Connection timed out</span><br></pre></td></tr></table></figure>
+<h3 id="找到-git-的安装地址"><a href="#找到-git-的安装地址" class="headerlink" title="找到 git 的安装地址"></a>找到 git 的安装地址</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 1.找到 git 安装地址</span><br><span class="line">whereis git</span><br><span class="line"></span><br><span class="line">// 2. 编辑配置</span><br><span class="line">vi /etc/ssh/ssh_config</span><br><span class="line"></span><br><span class="line">// 3.在末尾加入</span><br><span class="line">Host github.com</span><br><span class="line">User git</span><br><span class="line">Hostname ssh.github.com</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br><span class="line">Port 443</span><br><span class="line"></span><br><span class="line">// 4. 测试 git 是否连接 github 成功</span><br><span class="line">ssh -T git@github.com</span><br><span class="line">// or debugger</span><br><span class="line">ssh -vT git@github.com</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/01/04/2021-02-18/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/26/2020-12-26/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FateZeros">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="轻舞飞扬">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/26/2020-12-26/" itemprop="url">TypeScript 学习总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-26T00:00:00+08:00">
+                2020-12-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/12/26/2020-12-26/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/12/26/2020-12-26/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="TypeScript-学习总结"><a href="#TypeScript-学习总结" class="headerlink" title="TypeScript 学习总结"></a>TypeScript 学习总结</h1><h2 id="TypeScript-定义"><a href="#TypeScript-定义" class="headerlink" title="TypeScript 定义"></a>TypeScript 定义</h2><p><a href="https://www.typescriptlang.org/zh/" target="_blank" rel="noopener">TypeScript</a> 是一个 JavaScript 的超集，主要提供了对类型系统和 ES6 的支持。<br>目前 JS 引擎无法读取 TS 代码，因此任何 TS 文件都有一个预编译的过程。</p>
+<h2 id="TS-作用"><a href="#TS-作用" class="headerlink" title="TS 作用"></a>TS 作用</h2><p>TypeScript 是 JS 静态检查的最佳工具。在代码运行之前测试代码的正确性。 TS 会让 JS 的代码结构更好。</p>
+<p>到目前为止，JS 有 7 种类型：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. String</span><br><span class="line">2. Number</span><br><span class="line">3. Boolean</span><br><span class="line">4. Null</span><br><span class="line">5. Undefined</span><br><span class="line">6. Object</span><br><span class="line">7. Symbol(es6)</span><br></pre></td></tr></table></figure>
+<p>在使用 JS 进行开发的时候，<strong>声明变量的类型是可以随时改变的</strong>, 例如布尔类型可以变成字符串。js 松散的特性可能会在代码中造成严重的问题，破坏其可维护性。<br>TS 则可以通过向 JS 添加强类型检测，来避免这些问题。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> bool = <span class="literal">true</span></span><br><span class="line">bool = <span class="string">'string'</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/12/26/2020-12-26/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/05/2020-12-05/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FateZeros">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="轻舞飞扬">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/05/2020-12-05/" itemprop="url">什么是函数柯里化（Currying）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-05T00:00:00+08:00">
+                2020-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/12/05/2020-12-05/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/12/05/2020-12-05/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="函数柯里化"><a href="#函数柯里化" class="headerlink" title="函数柯里化"></a>函数柯里化</h1><h2 id="函数柯里化概念"><a href="#函数柯里化概念" class="headerlink" title="函数柯里化概念"></a>函数柯里化概念</h2><p>函数柯里化是一种关于函数的高阶技术，不仅可以被用于 <code>JavaScript</code>，还可被用于其他编程语言。</p>
+<p>柯里化是一种函数的转换，它将一个可调用的函数 <code>f(a, b, c)</code> 转换成 <code>f(a)(b)(c)</code>。</p>
+<p>柯里化不会调用函数，它只是对函数进行转换。</p>
+<p>先用一个实际应用对函数柯里化进行理解：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 函数柯里化</span><br><span class="line">funtion curry(f) &#123;</span><br><span class="line">  <span class="built_in">return</span> <span class="keyword">function</span>(a) &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="keyword">function</span>(b) &#123;</span><br><span class="line">      <span class="built_in">return</span> f(a, b)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> sum(a, b) &#123;</span><br><span class="line">  <span class="built_in">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> curriedSum = curry(sum)</span><br><span class="line"></span><br><span class="line">console.log(curriedSum(a)(b))</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/12/05/2020-12-05/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/21/2020-07-21/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -366,7 +1003,7 @@
           <h1 id="干了这碗碗毒鸡汤"><a href="#干了这碗碗毒鸡汤" class="headerlink" title="干了这碗碗毒鸡汤"></a>干了这碗碗毒鸡汤</h1><ol>
 <li><p><b>你以为你还能反杀，你以为来日方长，你以为你真正的生活还没有开始，可那都是你以为。你行动了么？你有任何实质性的东西支撑你的“以为”么？</b></p>
 </li>
-<li><p><b>一个人能改头换命的机会就那么几次，你过了30岁如果还浑浑噩噩，还看不出一点儿成功的兆头，那你99.999%的概率是没戏了。</b></p>
+<li><p><b>一个人能改头换命的机会就那么几次，你过了 30 岁如果还浑浑噩噩，还看不出一点儿成功的兆头，那你 99.999%的概率是没戏了。</b></p>
 </li>
 <li><p><b>不要拿着“我不会”当理由了</b></p>
 </li>
@@ -540,12 +1177,13 @@
             <h1 id="Centos7-搭建-Shadowsocks"><a href="#Centos7-搭建-Shadowsocks" class="headerlink" title="Centos7 搭建 Shadowsocks"></a>Centos7 搭建 Shadowsocks</h1><h2 id="Centos-7-中-SS-服务器配置"><a href="#Centos-7-中-SS-服务器配置" class="headerlink" title="Centos 7 中 SS 服务器配置"></a>Centos 7 中 SS 服务器配置</h2><p>shadowsocks 服务器需要 python 支撑，要先安装 python 环境。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install python-setuptools</span><br><span class="line"></span><br><span class="line">sudo easy_install pip</span><br><span class="line"></span><br><span class="line">sudo pip install shadowsocks</span><br></pre></td></tr></table></figure>
 <h2 id="SS-服务器配置"><a href="#SS-服务器配置" class="headerlink" title="SS 服务器配置"></a>SS 服务器配置</h2><p>在 <code>/etc</code> 文件夹下创建 <code>shadowsocks.json</code> 配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudu vi /etc/shadowsocks.json</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/shadowsocks.json</span><br></pre></td></tr></table></figure>
 <p>写入配置</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"server"</span>: <span class="string">"0.0.0.0"</span>,</span><br><span class="line">  <span class="string">"local_address"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="string">"local_port"</span>: 1080,</span><br><span class="line">  <span class="string">"port_password"</span>: &#123;</span><br><span class="line">    <span class="string">"8888"</span>: <span class="string">"password"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"timeout"</span>: 600,</span><br><span class="line">  <span class="string">"method"</span>: <span class="string">"aes-256-cfb"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>port_password</code>: 监听外部请求的端口和对应的密码；此处可以配置多个，以逗号分隔<br>用于 SS 客户端连接。</p>
 <h2 id="启动或着停止服务"><a href="#启动或着停止服务" class="headerlink" title="启动或着停止服务"></a>启动或着停止服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo ssserver -c /etc/shadowsocks.json -d start</span><br><span class="line"></span><br><span class="line">sudo ssserver -c /etc/shadowsocks.json -d stop</span><br></pre></td></tr></table></figure>
-<p><a href="http://www.choupangxia.com/2019/10/01/centos7-%E6%90%AD%E5%BB%BAss%EF%BC%88ssserver%EF%BC%89%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%8Ashadowsocks%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE/" target="_blank" rel="noopener">centos7中ss服务器配置</a></p>
+<p><a href="http://www.choupangxia.com/2019/10/01/centos7-%E6%90%AD%E5%BB%BAss%EF%BC%88ssserver%EF%BC%89%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%8Ashadowsocks%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE/" target="_blank" rel="noopener">centos7 中 ss 服务器配置</a> <br></p>
+<p><a href="https://bwh89.net/" target="_blank" rel="noopener">搬瓦工</a> <br><br><a href="https://kiwivm.64clouds.com/main-exec.php?mode=blacklistcheck" target="_blank" rel="noopener">搬瓦工测试 IP 是否被封</a> <br><br><a href="https://www.vpsgo.com/bandwagonhost-change-ip-request.html" target="_blank" rel="noopener">IP change</a> <br><br><a href="http://tool.chinaz.com/port/" target="_blank" rel="noopener">IP 查询是否被封</a> <br></p>
 
           
         
@@ -1223,671 +1861,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/23/2019-10-23/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FateZeros">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="轻舞飞扬">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/23/2019-10-23/" itemprop="url">深度学习怎样快速入门</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-23T00:00:00+08:00">
-                2019-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/10/23/2019-10-23/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/23/2019-10-23/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://www.zhihu.com/question/343407265/answer/830912894" target="_blank" rel="noopener">https://www.zhihu.com/question/343407265/answer/830912894</a></p>
-<p><a href="https://leetcode-cn.com/problems/sort-characters-by-frequency/comments/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/sort-characters-by-frequency/comments/</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/69714954" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/69714954</a></p>
-<p><a href="https://blog.csdn.net/han_xiaoyang/article/details/49797143" target="_blank" rel="noopener">https://blog.csdn.net/han_xiaoyang/article/details/49797143</a></p>
-<p><a href="https://www.zhihu.com/question/343407265/answer/830912894" target="_blank" rel="noopener">https://www.zhihu.com/question/343407265/answer/830912894</a></p>
-<p><a href="https://blog.csdn.net/qq_41577045/article/details/79844709" target="_blank" rel="noopener">https://blog.csdn.net/qq_41577045/article/details/79844709</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/19/2019-10-19/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FateZeros">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="轻舞飞扬">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/19/2019-10-19/" itemprop="url">python 语言学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-19T00:00:00+08:00">
-                2019-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/10/19/2019-10-19/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/19/2019-10-19/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="python-语言学习-三"><a href="#python-语言学习-三" class="headerlink" title="python 语言学习(三)"></a>python 语言学习(三)</h1><h2 id="Python-数据类型"><a href="#Python-数据类型" class="headerlink" title="Python 数据类型"></a>Python 数据类型</h2><p>Python 中一切皆为对象。JavaScripts 也如此。</p>
-<ol>
-<li><p>Booleans [布尔型]<br>或为 True[真] 或为 False[假]</p>
-</li>
-<li><p>Numbers [数值型]<br>Intergers [整数]: 1，2<br>Floats [浮点数]: 1.1, 1.2<br>Fractions [分数]: 1/2, 2/3</p>
-</li>
-<li><p>Strings [字符串型]<br>Unicode 字符序列</p>
-</li>
-<li><p>Bytes [字节] 和 Byte Arrays [字节数组]<br>一份图像文件</p>
-</li>
-<li><p>Lists [列表]<br>值的有序序列</p>
-</li>
-<li><p>Tuples [元组]<br>有序而不可变的值序列</p>
-</li>
-<li><p>Sets [集合]<br>装满无序值的包裹</p>
-</li>
-<li><p>Dictionaries [字典]<br>是键值对的无序包裹</p>
-</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/19/2019-10-19/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/2019-10-10/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FateZeros">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="轻舞飞扬">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/10/2019-10-10/" itemprop="url">python 语言学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-10T00:00:00+08:00">
-                2019-10-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/10/10/2019-10-10/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/10/2019-10-10/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="python-语言学习-二"><a href="#python-语言学习-二" class="headerlink" title="python 语言学习(二)"></a>python 语言学习(二)</h1><h2 id="使用-pip-管理包"><a href="#使用-pip-管理包" class="headerlink" title="使用 pip 管理包"></a>使用 pip 管理包</h2><p>使用 pip 程序来安装、升级和移除软件包，默认情况下 pip 将从 <a href="https://pypi.org" target="_blank" rel="noopener">Python Package Index</a> 安装软件包.</p>
-<p><code>pip</code> 子命令：<code>search</code>、<code>install</code>、<code>uninstall</code>、<code>freeze</code>等。</p>
-<p>可以参阅 <a href="https://docs.python.org/zh-cn/3/installing/index.html#installing-index" target="_blank" rel="noopener">安装 Python 模块</a> 指南来了解完整的 <code>pip</code> 文档。</p>
-<p>python 对应的是 pip 命令，而 python3 对应的则是 pip3.</p>
-<h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><p>安装最新的包</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install [包名]</span><br></pre></td></tr></table></figure>
-<p>安装特定版本的包</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install [包名]==[version]</span><br></pre></td></tr></table></figure>
-<p>升级包到最新版本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade [包名]</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/10/2019-10-10/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/2019-10-09/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FateZeros">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="轻舞飞扬">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/09/2019-10-09/" itemprop="url">python 语言学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-09T00:00:00+08:00">
-                2019-10-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/10/09/2019-10-09/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/09/2019-10-09/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="python-语言学习-一"><a href="#python-语言学习-一" class="headerlink" title="python 语言学习(一)"></a>python 语言学习(一)</h1><p><a href="https://docs.python.org/zh-cn/3/tutorial" target="_blank" rel="noopener">python</a> 官网</p>
-<p><code>python</code> 对应的是 <code>pip</code>, <code>python3</code> 对应的是 <code>pip3</code>.</p>
-<h2 id="python-中数字"><a href="#python-中数字" class="headerlink" title="python 中数字"></a>python 中数字</h2><p>python 运算符</p>
-<p>常用的 <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>=</code>; <code>()</code> 用来分组。</p>
-<p><code>//</code> 运算符用于做 floor division, 获取 <code>/</code> 操作后的整数结果。</p>
-<p><code>**</code> 用于计算乘方</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5 ** 2 <span class="comment"># 25</span></span><br></pre></td></tr></table></figure>
-<p>在交互模式下，上一次打印出来的<strong>表达式</strong>被赋值给变量 <code>_</code>,可以用于继续计算。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = 1</span><br><span class="line">&gt;&gt;&gt; b = 2</span><br><span class="line">&gt;&gt;&gt; a + b</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; a + _</span><br><span class="line">4</span><br><span class="line">&gt;&gt;&gt; c = 3</span><br><span class="line">&gt;&gt;&gt; 2 + _</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/09/2019-10-09/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1935,7 +1913,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1946,7 +1924,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1957,7 +1935,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2001,7 +1979,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

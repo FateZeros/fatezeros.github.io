@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="轻舞飞扬">
 <meta property="og:description" content="SCPSCP 是 Secure Copy 的简写，用于 Linux 下进行远程拷贝文件的命令， SCP 传输是经过加密的。 SCP 用途1.获取远程服务器上的文件2.将本机上的文件上传到远程服务器上远程服务器既没有配置 ftp 服务器，没有开启 web 服务器，也没有做共享，无法通过常规途径获取/上传文件时，只需要通过 scp 命令便可轻松的达到目的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-13T07:57:45.843Z">
+<meta property="og:updated_time" content="2020-12-11T07:17:37.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SCP 命令">
 <meta name="twitter:description" content="SCPSCP 是 Secure Copy 的简写，用于 Linux 下进行远程拷贝文件的命令， SCP 传输是经过加密的。 SCP 用途1.获取远程服务器上的文件2.将本机上的文件上传到远程服务器上远程服务器既没有配置 ftp 服务器，没有开启 web 服务器，也没有做共享，无法通过常规途径获取/上传文件时，只需要通过 scp 命令便可轻松的达到目的。">
@@ -350,6 +350,7 @@
 <h3 id="3-将文件上传到服务器"><a href="#3-将文件上传到服务器" class="headerlink" title="3.将文件上传到服务器"></a>3.将文件上传到服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P [端口号] [本地上传文件地址]/文件名 [用户名]@[域名/IP]:/root/../目录名/</span><br></pre></td></tr></table></figure>
 <h3 id="4-将本地目录上传到服务器上"><a href="#4-将本地目录上传到服务器上" class="headerlink" title="4.将本地目录上传到服务器上"></a>4.将本地目录上传到服务器上</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P [端口号] -r [本地上传文件目录地址]/ [用户名]@[域名/IP]:/root/../目录名/</span><br></pre></td></tr></table></figure>
 <h2 id="SCP-参数"><a href="#SCP-参数" class="headerlink" title="SCP 参数"></a>SCP 参数</h2><p>-P [端口号]: SSH 的端口号，SSH 端口未修改默认为 22 。<br>-r : 表示递归复制<br>-C : 允许压缩</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P 22 -r dist/ root@47.106.109.104:/root/../usr/tmp</span><br></pre></td></tr></table></figure>
 <h2 id="参考博文"><a href="#参考博文" class="headerlink" title="参考博文"></a>参考博文</h2><p><a href="http://www.cnblogs.com/peida/archive/2013/03/15/2960802.html" target="_blank" rel="noopener">scp 命令</a></p>
 
       
@@ -482,7 +483,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -493,7 +494,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -504,7 +505,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -564,7 +565,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
