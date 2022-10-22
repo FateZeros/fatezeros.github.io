@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Vue," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="轻舞飞扬" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Vue-cli3 配置环境变量与分环境打包配置环境变量在前端项目开发完成后，在发布的时候，我们会需要将项目部署到不同环境，例如开发，测试，预发布，生产。 这个时候就需要前端项目根据部署的环境，配置 环境变量 进行打包。 我们可以在前端项目的根目录下新增以下 环境变量文件： 12345.env                # 在所有的环境中都会被载入.env.local          # 在所">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-cli3 分环境打包">
+<meta property="og:url" content="http://yoursite.com/2020/05/28/2020-05-28/index.html">
+<meta property="og:site_name" content="轻舞飞扬">
+<meta property="og:description" content="Vue-cli3 配置环境变量与分环境打包配置环境变量在前端项目开发完成后，在发布的时候，我们会需要将项目部署到不同环境，例如开发，测试，预发布，生产。 这个时候就需要前端项目根据部署的环境，配置 环境变量 进行打包。 我们可以在前端项目的根目录下新增以下 环境变量文件： 12345.env                # 在所有的环境中都会被载入.env.local          # 在所">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-05-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-22T01:34:44.324Z">
+<meta property="article:author" content="FateZeros">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/28/2020-05-28/"/>
+
+
+
+
+
+  <title>vue-cli3 分环境打包 | 轻舞飞扬</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">轻舞飞扬</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">心有猛虎 细嗅蔷薇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/28/2020-05-28/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="轻舞飞扬">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue-cli3 分环境打包</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-28T00:00:00+08:00">
+                2020-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Vue-cli3-配置环境变量与分环境打包"><a href="#Vue-cli3-配置环境变量与分环境打包" class="headerlink" title="Vue-cli3 配置环境变量与分环境打包"></a>Vue-cli3 配置环境变量与分环境打包</h1><h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>在前端项目开发完成后，在发布的时候，我们会需要将项目部署到不同环境，例如开发，测试，预发布，生产。</p>
+<p>这个时候就需要前端项目根据部署的环境，配置 <code>环境变量</code> 进行打包。</p>
+<p>我们可以在前端项目的根目录下新增以下 <code>环境变量文件</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.<span class="built_in">env</span>                <span class="comment"># 在所有的环境中都会被载入</span></span><br><span class="line">.env.local          <span class="comment"># 在所有的环境中都会被载入,会被 git 忽略</span></span><br><span class="line">.<span class="built_in">env</span>.[mode]         <span class="comment"># 在指定的模式中被载入</span></span><br><span class="line">.<span class="built_in">env</span>.[mode].<span class="built_in">local</span>   <span class="comment"># 在指定的模式中被载入, 会被 git 忽略</span></span><br><span class="line">.env.develop        <span class="comment"># 示例</span></span><br></pre></td></tr></table></figure>
+
+<p>环境变量文件只包含环境变量的 <code>键值对</code>，例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 接口地址</span><br><span class="line">VUE_APP_BASE_URL = <span class="string">&#x27;xxx&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>除了自定义的 <code>VUE_APP_*</code> 变量之外，环境变量文件中还有 2 个特殊的变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NODE_ENV       <span class="comment"># develop、production、test 中的一个。具体的值取决于运行的模式</span></span><br><span class="line">BASE_URL       <span class="comment"># 与 vue.config.js 中的 publicPath 相同，即应用会部署到的基础路径</span></span><br></pre></td></tr></table></figure>
+
+<p>为一个指定模式的准备环境变量文件如 <code>.env.staging</code> 会比一般的环境变量文件 <code>.env</code> 拥有更高的优先级。</p>
+<span id="more"></span>
+
+<h2 id="Vue-cli3-模式概念"><a href="#Vue-cli3-模式概念" class="headerlink" title="Vue-cli3 模式概念"></a>Vue-cli3 模式概念</h2><p>模式是 <code>vue-cli</code> 项目中的一个重要概念，一般情况下会有 3 个模式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">development 模式用于 vue-cli-service serve                               <span class="comment"># 默认 NODE_ENV=development</span></span><br><span class="line">production 模式用于 vue-cli-service build 和 vue-cli-service <span class="built_in">test</span>:e2e    <span class="comment"># 默认 NODE_ENV=production</span></span><br><span class="line"><span class="built_in">test</span> 模式用于 vue-cli-service <span class="built_in">test</span>:unit</span><br></pre></td></tr></table></figure>
+
+<p><strong>模式不等同于 <code>NODE_ENV</code>, 一个模式可以包含多个环境变量</strong></p>
+<p>可以通过传递 <code>--mode</code> 选项参数覆写默认的模式，例如使用 <code>.env.staging</code> 的环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;staging&quot;</span>: <span class="string">&quot;vue-cli-service build --mode staging&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>.env.staging 文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 表明这是生产环境，webpack需要打包</span><br><span class="line">NODE_ENV=<span class="string">&#x27;production&#x27;</span></span><br><span class="line"></span><br><span class="line">VUE_APP_BASE_URL=<span class="string">&#x27;xxxx&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样使用 <code>npm run staging</code> 命令的时候, 只有以 <code>VUE_APP_</code> 开头的变量会被 <code>webpack.DefinePlugin</code> 静态嵌入到客户端侧的包中，即可以在项目代码中使用，例如 <code>process.env.VUE_APP_BASE_URL</code> 就可以获取环境变量文件中的值。</p>
+<h2 id="理解指令、模式、环境变量间的关系"><a href="#理解指令、模式、环境变量间的关系" class="headerlink" title="理解指令、模式、环境变量间的关系"></a>理解指令、模式、环境变量间的关系</h2><p>在 <code>vue-cli3</code> 中有一个 <code>vue-cli-service</code> 的命令，可以在 <code>package.json</code> 中看到。</p>
+<p><code>vue-cli-service</code> 命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">用法：</span><br><span class="line">vue-cli-service serve [options] [entry]</span><br><span class="line">对应 development 模式</span><br><span class="line"></span><br><span class="line">选项：</span><br><span class="line">  --open    在服务器启动时打开浏览器</span><br><span class="line">  --copy    在服务器启动时将 URL 复制到剪切版</span><br><span class="line">  --mode    指定环境模式 (默认值：development)</span><br><span class="line">  --host    指定 host (默认值：0.0.0.0)</span><br><span class="line">  --port    指定 port (默认值：8080)</span><br><span class="line">  --https   使用 https (默认值：<span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line">vue-cli-service build [options] [entry|pattern]</span><br><span class="line">对应 production 模式</span><br><span class="line"></span><br><span class="line">选项：</span><br><span class="line">  --mode         指定环境模式 (默认值：production)</span><br><span class="line">  --dest         指定输出目录 (默认值：dist)</span><br><span class="line">  --modern       面向现代浏览器带自动回退地构建应用</span><br><span class="line">  --target       app | lib | <span class="built_in">wc</span> | wc-async (默认值：app)</span><br><span class="line">  --name         库或 Web Components 模式下的名字 (默认值：package.json 中的 <span class="string">&quot;name&quot;</span> 字段或入口文件名)</span><br><span class="line">  --no-clean     在构建项目之前不清除目标目录</span><br><span class="line">  --report       生成 report.html 以帮助分析包内容</span><br><span class="line">  --report-json  生成 report.json 以帮助分析包内容</span><br><span class="line">  --watch        监听文件变化</span><br></pre></td></tr></table></figure>
+
+<p>当运行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;staging&quot;</span>: <span class="string">&quot;vue-cli-service build --mode staging&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果 <code>env.staging</code> 文件未声明 <code>NODE_ENV=production</code> 则 webpack 会以开发模式打包。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangyun1107892254/article/details/87351284">参考</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/19/2019-12-19/" rel="next" title="重温时间复杂度">
+                <i class="fa fa-chevron-left"></i> 重温时间复杂度
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/13/2020-06-13/" rel="prev" title="Centos7 搭建 Shadowsocks">
+                Centos7 搭建 Shadowsocks <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-cli3-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E4%B8%8E%E5%88%86%E7%8E%AF%E5%A2%83%E6%89%93%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">Vue-cli3 配置环境变量与分环境打包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.1.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-cli3-%E6%A8%A1%E5%BC%8F%E6%A6%82%E5%BF%B5"><span class="nav-number">1.2.</span> <span class="nav-text">Vue-cli3 模式概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E6%8C%87%E4%BB%A4%E3%80%81%E6%A8%A1%E5%BC%8F%E3%80%81%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.3.</span> <span class="nav-text">理解指令、模式、环境变量间的关系</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FateZeros</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

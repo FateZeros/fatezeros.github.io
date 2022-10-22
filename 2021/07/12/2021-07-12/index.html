@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="web," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="轻舞飞扬" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="浏览器事件循环机制JS 是单线程的，非阻塞的。虽然 JS 运行在浏览器中是单线程的，但是浏览器是事件驱动的(Event Driven), 浏览器中很多行为是异步的 (Asynchronized), 会创建事件并放入执行队列。浏览器中很多异步行为都是由浏览器中的线程去完成，主要由以下 3 个线程去执行： 1.JS 引擎线程2.GUI 渲染线程3.事件触发线程 JS 非阻塞的主要通过 Event Lo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器事件循环机制 (Event Loop)">
+<meta property="og:url" content="http://yoursite.com/2021/07/12/2021-07-12/index.html">
+<meta property="og:site_name" content="轻舞飞扬">
+<meta property="og:description" content="浏览器事件循环机制JS 是单线程的，非阻塞的。虽然 JS 运行在浏览器中是单线程的，但是浏览器是事件驱动的(Event Driven), 浏览器中很多行为是异步的 (Asynchronized), 会创建事件并放入执行队列。浏览器中很多异步行为都是由浏览器中的线程去完成，主要由以下 3 个线程去执行： 1.JS 引擎线程2.GUI 渲染线程3.事件触发线程 JS 非阻塞的主要通过 Event Lo">
+<meta property="og:locale">
+<meta property="og:image" content="http://yoursite.com/images/20210712/1.png">
+<meta property="article:published_time" content="2021-07-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-22T01:34:44.326Z">
+<meta property="article:author" content="FateZeros">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/20210712/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/07/12/2021-07-12/"/>
+
+
+
+
+
+  <title>浏览器事件循环机制 (Event Loop) | 轻舞飞扬</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">轻舞飞扬</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">心有猛虎 细嗅蔷薇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/12/2021-07-12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="轻舞飞扬">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">浏览器事件循环机制 (Event Loop)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-12T00:00:00+08:00">
+                2021-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="浏览器事件循环机制"><a href="#浏览器事件循环机制" class="headerlink" title="浏览器事件循环机制"></a>浏览器事件循环机制</h1><p><strong>JS 是单线程的，非阻塞的。</strong><br>虽然 JS 运行在浏览器中是单线程的，但是浏览器是事件驱动的(Event Driven), 浏览器中很多行为是异步的 (Asynchronized), 会创建事件并放入执行队列。<br>浏览器中很多异步行为都是由浏览器中的线程去完成，主要由以下 3 个线程去执行：</p>
+<p>1.JS 引擎线程<br>2.GUI 渲染线程<br>3.事件触发线程</p>
+<p>JS 非阻塞的主要通过 Event Loop 来实现。    </p>
+<h2 id="浏览器的事件循环"><a href="#浏览器的事件循环" class="headerlink" title="浏览器的事件循环"></a>浏览器的事件循环</h2><p><img src="/images/20210712/1.png"></p>
+<p>浏览器中的事件循环 Event Loop，分为同步执行栈和异步队列，首先会执行同步的任务，当同步任务执行完之后会从异步队列中取异步任务拿到同步执行栈中进行执行。</p>
+<h3 id="执行栈和事件队列"><a href="#执行栈和事件队列" class="headerlink" title="执行栈和事件队列"></a>执行栈和事件队列</h3><p>JavaScript 引擎线程专门处理 JavaScript 脚本，JS 引擎主要由 2 个组件构成</p>
+<p>1.堆(Memory Heap) - 内存分配发生的地方<br>2.栈(Call Stack) - 函数调用时会形成一个个栈帧(frame)</p>
+<p>可以使用<a target="_blank" rel="noopener" href="http://latentflip.com/loupe/">Loupe 工具</a>来了解 JavaScript 的调用堆栈、事件循环、回调队列如何执行的。</p>
+<h4 id="执行栈"><a href="#执行栈" class="headerlink" title="执行栈"></a>执行栈</h4><p>每个函数执行的时候都会生成新的 <code>execution context(执行上下文)</code>，执行上下文会包含一些当前函数的参数、局部变量，它会被推入栈中，<code>running execution context(正在执行的上下文)</code>始终处于栈的顶部。当函数执行完后，它的上下文会从栈弹出。 </p>
+<h4 id="事件队列-FIFO队列"><a href="#事件队列-FIFO队列" class="headerlink" title="事件队列 FIFO队列"></a>事件队列 FIFO队列</h4><p>先执行同步代码，遇到异步代码的执行，不会等待异步事件结果返回，而是将事件挂起，继续执行执行栈中的其他任务。<br>当异步事件返回结果，将它放到事件队列中，等待执行栈中的任务全部执行完成，然后主线程空闲状态，主线程会去查找事件队列中的任务，取第一个事件，然后把事件回调放到执行栈中，然后执行同步代码。</p>
+<p><strong>同步代码属于宏任务会开始执行一次，不同的异步任务又被分为宏任务和微任务。</strong></p>
+<span id="more"></span>
+
+
+<h3 id="宏任务-Macro-Task-和微任务-Micro-Task"><a href="#宏任务-Macro-Task-和微任务-Micro-Task" class="headerlink" title="宏任务(Macro Task)和微任务(Micro Task)"></a>宏任务(Macro Task)和微任务(Micro Task)</h3><h4 id="宏任务"><a href="#宏任务" class="headerlink" title="宏任务"></a>宏任务</h4><p><strong>优先级低，先定义的先执行。</strong>包括：ajax，click，setTimeout，setInterval，事件绑定，postMessage，MessageChannel</p>
+<h4 id="微任务"><a href="#微任务" class="headerlink" title="微任务"></a>微任务</h4><p><strong>微任务，优先级高，并且可以插队，不是先定义先执行。</strong> 包括：promise 中的 then，observer，MutationObserver，setImmediate。</p>
+<p>宏任务包括 Script, setTimeout/setInterval, setImmediate, postMessage, I/O 和 UI rendering。<br>微任务包括 Promise.then(), Object.observe 和 Mutation.Observer。</p>
+<p>说明:<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/setImmediate">setImmediate 非标准</a><br><a href="">Object.observe 已废弃</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/MutationObserver">Mutation.Observer</a></p>
+<h3 id="运行机制"><a href="#运行机制" class="headerlink" title="运行机制"></a>运行机制</h3><p>异步任务的返回结果会被放到一个任务队列中，根据异步事件的类型，将结果放到对应的宏任务和微任务队列中去。<br>当<code>执行栈</code>为空时，=&gt; 查找微任务队列事件 =&gt; 宏任务队列事件。</p>
+<h2 id="经典题目分析"><a href="#经典题目分析" class="headerlink" title="经典题目分析"></a>经典题目分析</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">async <span class="keyword">function</span> <span class="function"><span class="title">async1</span></span>() &#123;</span><br><span class="line">  console.log(<span class="string">&#x27;async1 start&#x27;</span>);</span><br><span class="line">  await async2();</span><br><span class="line">  console.log(<span class="string">&#x27;async1 end&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">async <span class="keyword">function</span> <span class="function"><span class="title">async2</span></span>() &#123;</span><br><span class="line">  console.log(<span class="string">&#x27;async2&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">console.log(<span class="string">&#x27;script start&#x27;</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  console.log(<span class="string">&#x27;setTimeout&#x27;</span>);</span><br><span class="line">&#125;, 0)</span><br><span class="line">async1();</span><br><span class="line">new Promise(<span class="keyword">function</span>(resolve) &#123;</span><br><span class="line">  console.log(<span class="string">&#x27;promise1&#x27;</span>);</span><br><span class="line">  resolve();</span><br><span class="line">&#125;).<span class="keyword">then</span>(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  console.log(<span class="string">&#x27;promise2&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">console.log(<span class="string">&#x27;script end&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>1.执行同步代码，输出 <code>script start</code><br>2.遇到 setTimeout，将回调压入宏任务队列<br>3.执行 async1，输出 <code>async1 start</code>，然后执行 async2，输出 <code>async2</code>，将 await async2() 后的代码压到微任务队列中<br>4.执行 Promise，输出 <code>promise1</code>, 将 Promise.then() 压入到微任务队列中。<br>5.输出 <code>script end</code> ，至此同步代码执行完成<br>6.执行微任务队列中的代码，输出 <code>async1 end</code>，然后输出 <code>promise2</code>，此时微任务队列执行完成。<br>7.执行宏任务队列代码，输出 <code>setTimeout</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">console.log(<span class="string">&#x27;start&#x27;</span>);</span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">  console.log(<span class="string">&#x27;children2&#x27;</span>);</span><br><span class="line">  Promise.resolve().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">    console.log(<span class="string">&#x27;children3&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;, 0);</span><br><span class="line"></span><br><span class="line">new Promise(<span class="keyword">function</span>(resolve, reject) &#123;</span><br><span class="line">  console.log(<span class="string">&#x27;children4&#x27;</span>);</span><br><span class="line">  setTimeout(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">&#x27;children5&#x27;</span>);</span><br><span class="line">    resolve(<span class="string">&#x27;children6&#x27;</span>)</span><br><span class="line">  &#125;, 0)</span><br><span class="line">&#125;).<span class="keyword">then</span>((res) =&gt; &#123;</span><br><span class="line">  console.log(<span class="string">&#x27;children7&#x27;</span>);</span><br><span class="line">  setTimeout(() =&gt; &#123;</span><br><span class="line">    console.log(res);</span><br><span class="line">  &#125;, 0)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>1.执行同步代码，输出 <code>start</code><br>2.setTimeout 压入宏任务队列1<br>3.遇到 Promise, 输出 <code>children4</code>，遇到 setTimeout 压入宏任务队列2，Promise.then 还没执行。<br>4.执行宏任务队列1，输出 <code>children2</code><br>5.执行宏任务队列1中的微任务 Promise.then()，输出 <code>children3</code><br>6.执行宏任务队列2，输出 <code>children5</code>，并 resolve 执行 Promise.then，输出 <code>children7</code><br>7.遇到 setTimeout 压入宏任务队列，此时微任务队列没任务，执行宏任务，输出 <code>children6</code></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903606466904078">浏览器事件循环机制（event loop）</a><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022805523">JavaScript中的Event Loop（事件循环）机制</a><br><a target="_blank" rel="noopener" href="http://lynnelv.github.io/js-event-loop-browser">深入理解js事件循环机制（浏览器篇)</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web/" rel="tag"># web</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/07/10/2021-07-10/" rel="next" title="浏览器进程与线程详解">
+                <i class="fa fa-chevron-left"></i> 浏览器进程与线程详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/07/15/2021-07-15/" rel="prev" title="Vue2.0 Options API 与 Vue3.0 Composition API 区别">
+                Vue2.0 Options API 与 Vue3.0 Composition API 区别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">浏览器事件循环机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.1.</span> <span class="nav-text">浏览器的事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%A0%88%E5%92%8C%E4%BA%8B%E4%BB%B6%E9%98%9F%E5%88%97"><span class="nav-number">1.1.1.</span> <span class="nav-text">执行栈和事件队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%A0%88"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">执行栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E9%98%9F%E5%88%97-FIFO%E9%98%9F%E5%88%97"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">事件队列 FIFO队列</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8F%E4%BB%BB%E5%8A%A1-Macro-Task-%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1-Micro-Task"><span class="nav-number">1.1.2.</span> <span class="nav-text">宏任务(Macro Task)和微任务(Micro Task)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8F%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">宏任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AE%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">微任务</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="nav-number">1.1.3.</span> <span class="nav-text">运行机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%8F%E5%85%B8%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">经典题目分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">1.3.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FateZeros</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

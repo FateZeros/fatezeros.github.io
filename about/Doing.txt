@@ -1,0 +1,47 @@
+
+# 自律
+
+马上就30了，感觉自己还是一事无成，是不是该改变一下当前的自己呢
+
+## 持之以恒
+
+1. 2019-10-29.md
+2. 每天抽出 2H 的时间读书
+
+2020年书单：
+
+==== 正在进行 =====
+《JavaScript权威指南》
+
+==== 待完成 ======
+《JavaScript高级程序设计》
+《JavaScript DOM编程艺术》
+《你不知道的JavaScript》
+《JavaScript语言精粹》
+
+[函数柯里化](https://mp.weixin.qq.com/s/Jkg1K16GEaGsTVw-JrGwQA)
+
+[算法小结](https://mp.weixin.qq.com/s/huWP4P6zlLip9wEsCrWz1Q)
+
+[ES6实用指南](https://mp.weixin.qq.com/s/qN8opwgPwrS8ZDCE4dSi_A)
+
+[前端监控原理](https://mp.weixin.qq.com/s/5z_8iyvWNHyjedGkR3Yimw)
+
+[Vue3最新的15个常用API](https://mp.weixin.qq.com/s/89G4cgaxIYR_7OyCdNBcmg)
+
+[React 下的同构渲染](https://mp.weixin.qq.com/s/ENhkt-KrdeNn3LGfXZFuCw)
+
+=== 已完成 =====
+
+
+## 以周为尺
+
+以周为单位，时刻提醒自己
+
+## 亟需解决
+
+[Vue 3 源码解读](https://mp.weixin.qq.com/s/k7YXSYSbheS6eKk9sPvlgQ)
+[前端百题](https://mp.weixin.qq.com/s?__biz=MzIxMjExNzQxMQ==&mid=2247485633&idx=1&sn=ce74e76b58274934d23f1b416c05bf95&chksm=974bba0da03c331b7cf2e2e17104bc20e69a1f1c373ad759c2211c3ae1a2c7e81cb524964c82&mpshare=1&scene=23&srcid=0804twhVu5AuymNJx10Ywkxn&sharer_sharetime=1628037166143&sharer_shareid=bf7a7143f255060150499be3bd42eb7d%23rd)
+[file-loader](https://mp.weixin.qq.com/s/UV9YVv98QncNhMWCAbqNXw)
+[JS 高级程序设计](https://juejin.cn/post/6992365335588372511)
+[死磕36道JS手写题](https://mp.weixin.qq.com/s/sDZudDS2jn8PZrSAtkicTg)

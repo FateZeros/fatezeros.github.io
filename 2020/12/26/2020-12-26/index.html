@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="TypeScript," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="轻舞飞扬" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="TypeScript 学习总结TypeScript 定义TypeScript 是一个 JavaScript 的超集，主要提供了对类型系统和 ES6 的支持。目前 JS 引擎无法读取 TS 代码，因此任何 TS 文件都有一个预编译的过程。 TS 作用TypeScript 是 JS 静态检查的最佳工具。在代码运行之前测试代码的正确性。 TS 会让 JS 的代码结构更好。 到目前为止，JS 有 7 种类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript 学习总结">
+<meta property="og:url" content="http://yoursite.com/2020/12/26/2020-12-26/index.html">
+<meta property="og:site_name" content="轻舞飞扬">
+<meta property="og:description" content="TypeScript 学习总结TypeScript 定义TypeScript 是一个 JavaScript 的超集，主要提供了对类型系统和 ES6 的支持。目前 JS 引擎无法读取 TS 代码，因此任何 TS 文件都有一个预编译的过程。 TS 作用TypeScript 是 JS 静态检查的最佳工具。在代码运行之前测试代码的正确性。 TS 会让 JS 的代码结构更好。 到目前为止，JS 有 7 种类">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-12-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-22T01:34:44.324Z">
+<meta property="article:author" content="FateZeros">
+<meta property="article:tag" content="TypeScript">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/12/26/2020-12-26/"/>
+
+
+
+
+
+  <title>TypeScript 学习总结 | 轻舞飞扬</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">轻舞飞扬</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">心有猛虎 细嗅蔷薇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/26/2020-12-26/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="轻舞飞扬">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TypeScript 学习总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-26T00:00:00+08:00">
+                2020-12-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="TypeScript-学习总结"><a href="#TypeScript-学习总结" class="headerlink" title="TypeScript 学习总结"></a>TypeScript 学习总结</h1><h2 id="TypeScript-定义"><a href="#TypeScript-定义" class="headerlink" title="TypeScript 定义"></a>TypeScript 定义</h2><p><a target="_blank" rel="noopener" href="https://www.typescriptlang.org/zh/">TypeScript</a> 是一个 JavaScript 的超集，主要提供了对类型系统和 ES6 的支持。<br>目前 JS 引擎无法读取 TS 代码，因此任何 TS 文件都有一个预编译的过程。</p>
+<h2 id="TS-作用"><a href="#TS-作用" class="headerlink" title="TS 作用"></a>TS 作用</h2><p>TypeScript 是 JS 静态检查的最佳工具。在代码运行之前测试代码的正确性。 TS 会让 JS 的代码结构更好。</p>
+<p>到目前为止，JS 有 7 种类型：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. String</span><br><span class="line">2. Number</span><br><span class="line">3. Boolean</span><br><span class="line">4. Null</span><br><span class="line">5. Undefined</span><br><span class="line">6. Object</span><br><span class="line">7. Symbol(es6)</span><br></pre></td></tr></table></figure>
+
+<p>在使用 JS 进行开发的时候，<strong>声明变量的类型是可以随时改变的</strong>, 例如布尔类型可以变成字符串。js 松散的特性可能会在代码中造成严重的问题，破坏其可维护性。<br>TS 则可以通过向 JS 添加强类型检测，来避免这些问题。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> bool = <span class="literal">true</span></span><br><span class="line">bool = <span class="string">&#x27;string&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="TS-的常用数据类型"><a href="#TS-的常用数据类型" class="headerlink" title="TS 的常用数据类型"></a>TS 的常用数据类型</h2><p>常用的类型：boolean、number、string、null、undefined、Symbol、void 空类型、any等等。<br>可以去官网查看完整的<a target="_blank" rel="noopener" href="https://www.typescriptlang.org/docs/handbook/basic-types.html">TS 数据类型</a></p>
+<p>1.Boolean</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const isDone: boolean = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>2.Number</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const decimal: number = 1</span><br></pre></td></tr></table></figure>
+
+<p>3.联合类型和 type 类型别名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> possible = string | number</span><br><span class="line"><span class="built_in">let</span> data: possible = 123</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> myNumber: string | number</span><br><span class="line">myNumber = <span class="string">&#x27;123&#x27;</span></span><br><span class="line">console.log(myNumber.length)</span><br></pre></td></tr></table></figure>
+
+<p>4.枚举 Enum</p>
+<p>用于取值被限定在一定范围的场景内，比如一周只有7天。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">enum Color = &#123;</span><br><span class="line">  Red,</span><br><span class="line">  Green,</span><br><span class="line">  Blue</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const c: Color = Color.Red</span><br></pre></td></tr></table></figure>
+
+<p>5.函数类型</p>
+<p>5.1可选参数用 <code>?</code> 表示。可选参数必须在必需参数的后面。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> addCount(a: number, b?: number) &#123;</span><br><span class="line">  <span class="keyword">if</span> (b) &#123;</span><br><span class="line">    <span class="built_in">return</span> a + b</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">return</span> a</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.2 默认参数，在 <code>es6</code> 中我们允许给函数的参数添加默认值， <strong>TS 会将添加了默认值的参数识别为可选参数</strong>，此时不再受到可选参数<br>必须在必需参数后面的限制了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> addCount(a: number = 1, b: number) &#123;</span><br><span class="line">  <span class="built_in">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(addCount(undefined, 2))</span><br></pre></td></tr></table></figure>
+
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>定义：是指在定义函数，接口或者类的时候，不预先制定具体的类型，而在使用的时候在指定类型的一种特性。</p>
+<p>通俗的解释，泛型是类型系统中的“参数”，主要作用是为了类型的重用。从定义可以看出，它只会用在函数，接口或者类中。因为 TS 是静态类型系统，是在 JS 进行编译<br>时进行类型检查的系统，因此，泛型这种参数，实际上在编译过程中的运行时使用。</p>
+<h3 id="泛型函数"><a href="#泛型函数" class="headerlink" title="泛型函数"></a>泛型函数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> identity&lt;T&gt;(value: T): T &#123;</span><br><span class="line">  <span class="built_in">return</span> value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">identity&lt;number&gt;(123) // 123</span><br><span class="line"></span><br><span class="line">// 传递2个类型</span><br><span class="line"><span class="keyword">function</span> identity&lt;T, U&gt;(value: T, message: U): T &#123;</span><br><span class="line">  console.log(message)</span><br><span class="line">  <span class="built_in">return</span> value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const res = identity&lt;number, string&gt;(123, <span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">console.log(res) // 信息 123</span><br></pre></td></tr></table></figure>
+
+<p><code>T</code> 被称为类型变量</p>
+<p><code>T</code> 代表 <code>type</code>, 在定义泛型时通常用作第一个类型变量的名称。但实际上 <code>T</code> 可以用作任何有效名称替代。除了 <code>T</code> 之外，还有其他常见的泛型变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">K(key): 表示对象中的键类型</span><br><span class="line">V(Value): 表示对象中的值类型</span><br><span class="line">E(Element): 表示元素类型</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> createArr(length: number, value: any): Array&lt;any&gt; &#123;</span><br><span class="line">  <span class="built_in">let</span> res = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; length; i++) &#123;</span><br><span class="line">    res.push(value)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> res</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">createArr&lt;string&gt;(3, <span class="string">&#x27;x&#x27;</span>) // [<span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;x&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>Array<any> 允许数组的每一项都为任意类型。但是我们的预期是数组中每一项都应该是输入的 <code>value</code> 类型。所以 <code>createArr</code> 函数可以改为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 在函数名后添加了 &lt;T&gt;, 其中用 T 表示任意输入的类型，在后面输入的 value: T 和输出的 Array&lt;T&gt; 中皆可使用</span><br><span class="line"><span class="keyword">function</span> createArr&lt;T&gt;(length: number, value: T): Array&lt;T&gt; &#123;</span><br><span class="line">  <span class="built_in">let</span> res: T[] = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; length; i++) &#123;</span><br><span class="line">    res.push(value)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> res</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 在调用的时候，可以指定具体的类型，也可以不指定，而让类型推论自己推算出来</span><br><span class="line">createArr(3, <span class="string">&#x27;x&#x27;</span>) // [<span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;x&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 泛型接口</span><br><span class="line">interface identities&lt;T, U&gt; &#123;</span><br><span class="line">  value: T,</span><br><span class="line">  msg: U</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> identity&lt;T, U&gt;(value: T, msg: U) &#123;</span><br><span class="line">  <span class="built_in">let</span> text: identities&lt;T, U&gt; = &#123;</span><br><span class="line">    value,</span><br><span class="line">    msg</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> text</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">identity(123, <span class="string">&#x27;test&#x27;</span>) // &#123; value: 123, msg: <span class="string">&#x27;test&#x27;</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 泛型类</span><br><span class="line">interface InterfaceTest&lt;U&gt; &#123;</span><br><span class="line">  value: U,</span><br><span class="line">  getIdentity: () =&gt; U</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class IdentityClass&lt;T&gt; implements InterfaceTest&lt;T&gt; &#123;</span><br><span class="line">  value: T</span><br><span class="line"></span><br><span class="line">  constructor(value: T) &#123;</span><br><span class="line">    this.value = value</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  getIdentity(): T &#123;</span><br><span class="line">    <span class="built_in">return</span> this.value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const <span class="built_in">test</span> = new IdentityClass&lt;number&gt;(123)</span><br><span class="line">console.log(tes.getIdentity()) // 123</span><br></pre></td></tr></table></figure>
+
+<p>什么时候使用泛型？<br>1.当函数、接口和类将处理多种数据类型时<br>2.当函数、接口或类在多个地方使用该数据类型时</p>
+<h2 id="TypeScript-对象和接口"><a href="#TypeScript-对象和接口" class="headerlink" title="TypeScript 对象和接口"></a>TypeScript 对象和接口</h2><p>1.Array<object> 如果访问数组对象中的属性，会报错，因为普通 JS 对象中没有对象的属性。<br>2.interface 接口 (由类去实现)</p>
+<p>TS 的核心原则之一，就是对值的结构进行<strong>类型检查</strong>，在 TS 中，会使用接口 <code>interfaces</code> 来定义对象的类型。</p>
+<p><strong>用接口来定义一个模型，放在代码的顶部。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">interface ILink &#123;</span><br><span class="line">  url: string,</span><br><span class="line">  getName(a: number): void</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 在定义接口名字前面加上大写的 `I`, 这是 TS 的惯例</span><br><span class="line">Array&lt;ILink&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="接口和字段"><a href="#接口和字段" class="headerlink" title="接口和字段"></a>接口和字段</h3><p>TS 接口是该语言最强大的结构之一。接口有助于整个应用程序中形成模型，参与项目的开发人员都需要遵循此模型。</p>
+<p>TS 中可以通过函数声明来推断参数是 <code>ILink</code> 的类型数组。因此，该数组中的任何对象都必需实现接口 <code>ILink</code> 中定义的所有字段。<br>但在大多数情况下，实现所有字段不太现实。可以声明接口的字段是可选的，用 <code>?</code> 表示。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface ILink = &#123;</span><br><span class="line">  des?: string,</span><br><span class="line">  <span class="built_in">id</span>?: number,</span><br><span class="line">  url: string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="接口继承接口"><a href="#接口继承接口" class="headerlink" title="接口继承接口"></a>接口继承接口</h3><p>在 TS 中可以使用继承来扩展接口，关键字 <code>extends</code> 表示；扩展接口意味着其属性并扩展他们以实现代码重用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">interface ILink &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 接口继承, 在 ILink 的接口上新增 title 和 body 字段</span><br><span class="line">interface IPost extends ILink &#123;</span><br><span class="line">  title: string,</span><br><span class="line">  body: string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="类实现接口"><a href="#类实现接口" class="headerlink" title="类实现接口"></a>类实现接口</h3><p>实现 <code>implements</code> 是面向对象中的一个重要概念。一般来讲，一个类只能继承自另外一个类，有时候不同的类之间可以有一些共同的特性。可以把特性<br>提取成接口 <code>interfaces</code>, 用 <code>implements</code> 关键字来实现。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">interface IAlarm &#123;</span><br><span class="line">  alertMethod(): void;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface ILight &#123;</span><br><span class="line">  lightOn(): void;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Door &#123;&#125;</span><br><span class="line"></span><br><span class="line">class SecurityDoor extends Door implements IAlarm &#123;</span><br><span class="line">  <span class="function"><span class="title">alertMethod</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">&#x27;alert method&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Car implements IAlarm, ILight &#123;</span><br><span class="line">  <span class="function"><span class="title">alertMethod</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">&#x27;alert method&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">lightOn</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">&#x27;light on&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="接口继承类"><a href="#接口继承类" class="headerlink" title="接口继承类"></a>接口继承类</h3><h3 id="声明合并"><a href="#声明合并" class="headerlink" title="声明合并"></a>声明合并</h3><p>如果定义来两个相同名字的函数、接口或者类，他们会合并成一个类型。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">interface IAlarm &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface IAlarm &#123;</span><br><span class="line">  weight: number</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="class-和-interface-的区别"><a href="#class-和-interface-的区别" class="headerlink" title="class 和 interface 的区别"></a>class 和 interface 的区别</h2><p>由于 TS 的宗旨是兼容 JS ，运行时要擦除所有类型信息，因此 interface 在运行时是被完全消除的。而 class 经过编译后，在运行时依然存在。因此要声明的类型只是纯粹的类型信息，只需要声明 interface 即可。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TypeScript/" rel="tag"># TypeScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/05/2020-12-05/" rel="next" title="什么是函数柯里化（Currying）">
+                <i class="fa fa-chevron-left"></i> 什么是函数柯里化（Currying）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/04/2021-02-18/" rel="prev" title="git 连接 github 超时问题">
+                git 连接 github 超时问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TypeScript-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">TypeScript 学习总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TypeScript-%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">TypeScript 定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TS-%E4%BD%9C%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">TS 作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TS-%E7%9A%84%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">TS 的常用数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B"><span class="nav-number">1.4.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.1.</span> <span class="nav-text">泛型函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.4.2.</span> <span class="nav-text">泛型接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E7%B1%BB"><span class="nav-number">1.4.3.</span> <span class="nav-text">泛型类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TypeScript-%E5%AF%B9%E8%B1%A1%E5%92%8C%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.5.</span> <span class="nav-text">TypeScript 对象和接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E5%92%8C%E5%AD%97%E6%AE%B5"><span class="nav-number">1.5.1.</span> <span class="nav-text">接口和字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E7%BB%A7%E6%89%BF%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.5.2.</span> <span class="nav-text">接口继承接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%AE%9E%E7%8E%B0%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.5.3.</span> <span class="nav-text">类实现接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E7%BB%A7%E6%89%BF%E7%B1%BB"><span class="nav-number">1.5.4.</span> <span class="nav-text">接口继承类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E5%90%88%E5%B9%B6"><span class="nav-number">1.5.5.</span> <span class="nav-text">声明合并</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class-%E5%92%8C-interface-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.</span> <span class="nav-text">class 和 interface 的区别</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FateZeros</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
